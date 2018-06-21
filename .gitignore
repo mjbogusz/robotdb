@@ -1,3 +1,4 @@
+## Python
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -102,3 +103,12 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+## Django (additional)
+migrations/
+
+## Project files
+robotPhotos/
+
+## Editor files
+*.sublime-workspace
