@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}RobotDB{% endblock %}
+
+{% block content %}
+{% if robotList %}
+	<p>Robots:</p>
+	<ul>
+	{% for robot in robotList %}
+		<li>
+			<a href="/robot/{{ robot.id }}/">{{ robot.name }}</a>
+			{% if robot.robotimage_set %}
+				<ul>
+				{% for robotImage in robot.robotimage_set.all %}
+					<li>{{ robotImage.image.url }}<img src="{{ robotImage.image.url }}" /></li>
+				{% endfor %}
+				</ul>
+			{% endif %}
+		</li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>No robots.</p>
+{% endif %}
+{% endblock %}

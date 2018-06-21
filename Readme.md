@@ -16,7 +16,7 @@ export PATH=$PATH:~/.local/bin
 ```sh
 pipenv install
 pipenv shell
-./manage.py makemigrations
+./manage.py makemigrations robotdb
 ./manage.py migrate
 ./manage.py createsuperuser
 exit

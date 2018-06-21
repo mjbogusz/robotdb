@@ -108,7 +108,8 @@ venv.bak/
 migrations/
 
 ## Project files
-robotPhotos/
+# static/
+media/
 
 ## Editor files
 *.sublime-workspace
