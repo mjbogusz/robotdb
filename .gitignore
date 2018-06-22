@@ -113,3 +113,8 @@ media/
 
 ## Editor files
 *.sublime-workspace
+
+## CSS/SCSS
+*.css.map
+
+/static/style.css
