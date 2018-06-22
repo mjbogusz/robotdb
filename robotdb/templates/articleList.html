@@ -3,13 +3,13 @@
 
 {% block content %}
 {% if count %}
-	<h2>Robots:</h2>
-	{% render_table robotTable %}
+	<h2>Articles:</h2>
+	{% render_table articleTable %}
 {% else %}
-	<p>No robots.</p>
+	<p>No articles.</p>
 {% endif %}
 {% endblock %}
 
 {% block sidebar %}
-<p>Add a robot</p>
+<p>Add an article</p>
 {% endblock %}

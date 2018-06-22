@@ -2,8 +2,8 @@
 {% load render_table from django_tables2 %}
 
 {% block content %}
-{% if applicationTable %}
-	<p>Applications:</p>
+{% if count %}
+	<h2>Applications:</h2>
 	{% render_table applicationTable %}
 {% else %}
 	<p>No applications.</p>

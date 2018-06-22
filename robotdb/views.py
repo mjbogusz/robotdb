@@ -1,78 +1,78 @@
 from django.shortcuts import render
 from django_tables2 import RequestConfig
 
-from django.http import HttpResponse
-from django.template import loader
 from .models import Application, Article, Feature, Project, Robot
-from .tables import ApplicationTable
+from .tables import ApplicationTable, ArticleTable, FeatureTable, ProjectTable, RobotTable
 
 def index(request):
 	return render(request, 'index.html')
 
 def applicationList(request):
-	applicationTable = ApplicationTable(Application.objects.all())
+	applications = Application.objects.all()
+	applicationTable = ApplicationTable(applications)
 	RequestConfig(request).configure(applicationTable)
-	return render(request, 'applicationList.html', {'applicationTable': applicationTable})
+	return render(request, 'applicationList.html', {
+		'count': len(applications),
+		'applicationTable': applicationTable,
+	})
 
 def applicationDetail(request, applicationID):
-	template = loader.get_template('applicationDetails.html')
-	context = {
+	return render(request, 'applicationDetails.html', {
 		'application': Application.objects.get(id = applicationID)
-	}
-	return HttpResponse(template.render(context, request))
+	})
 
 def articleList(request):
-	template = loader.get_template('articleList.html')
-	context = {
-		'articleList': Article.objects.all()
-	}
-	return HttpResponse(template.render(context, request))
+	articles = Article.objects.all()
+	articleTable = ArticleTable(articles)
+	RequestConfig(request).configure(articleTable)
+	return render(request, 'articleList.html', {
+		'count': len(articles),
+		'articleTable': articleTable,
+	})
 
 def articleDetail(request, articleID):
-	template = loader.get_template('articleDetails.html')
-	context = {
+	return render(request, 'articleDetails.html', {
 		'article': Article.objects.get(id = articleID)
-	}
-	return HttpResponse(template.render(context, request))
+	})
 
 def featureList(request):
-	template = loader.get_template('featureList.html')
-	context = {
-		'featureList': Feature.objects.all()
-	}
-	return HttpResponse(template.render(context, request))
+	features = Feature.objects.all()
+	featureTable = FeatureTable(features)
+	RequestConfig(request).configure(featureTable)
+	return render(request, 'featureList.html', {
+		'count': len(features),
+		'featureTable': featureTable,
+	})
 
 def featureDetail(request, featureID):
-	template = loader.get_template('featureDetails.html')
-	context = {
+	return render(request, 'featureDetails.html', {
 		'feature': Feature.objects.get(id = featureID)
-	}
-	return HttpResponse(template.render(context, request))
+	})
 
 def projectList(request):
-	template = loader.get_template('projectList.html')
-	context = {
-		'projectList': Project.objects.all()
-	}
-	return HttpResponse(template.render(context, request))
+	projects = Project.objects.all()
+	projectTable = ProjectTable(projects)
+	RequestConfig(request).configure(projectTable)
+	return render(request, 'projectList.html', {
+		'count': len(projects),
+		'projectTable': projectTable,
+	})
 
 def projectDetail(request, projectID):
-	template = loader.get_template('projectDetails.html')
-	context = {
+	return render(request, 'projectDetails.html', {
 		'project': Project.objects.get(id = projectID)
-	}
-	return HttpResponse(template.render(context, request))
+	})
 
 def robotList(request):
-	template = loader.get_template('robotList.html')
-	context = {
-		'robotList': Robot.objects.all()
-	}
-	return HttpResponse(template.render(context, request))
+	robots = Robot.objects.all()
+	robotTable = RobotTable(robots)
+	RequestConfig(request).configure(robotTable)
+	return render(request, 'robotList.html', {
+		'count': len(robots),
+		'robotTable': robotTable,
+	})
 
 def robotDetail(request, robotID):
-	template = loader.get_template('robotDetails.html')
-	context = {
+	return render(request, 'robotDetails.html', {
 		'robot': Robot.objects.get(id = robotID)
-	}
-	return HttpResponse(template.render(context, request))
+	})
