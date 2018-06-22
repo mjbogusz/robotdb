@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load render_table from django_tables2 %}
+
+{% block content %}
+{% if applicationTable %}
+	<p>Applications:</p>
+	{% render_table applicationTable %}
+{% else %}
+	<p>No applications.</p>
+{% endif %}
+{% endblock %}
+
+{% block sidebar %}
+<p>Add an application</p>
+{% endblock %}

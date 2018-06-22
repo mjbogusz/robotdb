@@ -20,9 +20,19 @@ from django.urls import path
 
 from . import views
 
+# Application, Article, Feature, Project, Robot
+
 urlpatterns = [
 	path('admin/', admin.site.urls),
 	path('', views.index, name = 'index'),
-	path('robots', views.index, name = 'index'),
+	path('applications', views.applicationList, name = 'applicationList'),
+	path('applications/<int:applicationID>/', views.applicationDetail, name = 'applicationDetail'),
+	path('articles', views.articleList, name = 'articleList'),
+	path('articles/<int:articleID>/', views.articleDetail, name = 'articleDetail'),
+	path('features', views.featureList, name = 'featureList'),
+	path('features/<int:featureID>/', views.featureDetail, name = 'featureDetail'),
+	path('projects', views.projectList, name = 'projectList'),
+	path('projects/<int:projectID>/', views.projectDetail, name = 'projectDetail'),
+	path('robots', views.robotList, name = 'robotList'),
 	path('robots/<int:robotID>/', views.robotDetail, name = 'robotDetail'),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

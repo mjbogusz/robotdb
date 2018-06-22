@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if robot %}
+	<p>Robots:</p>
+	<table class="robotList">
+		<tr>
+			<td>Name</td>
+			<td>Producer</td>
+			<td>Country</td>
+			<td>Link</td>
+			<td>Link to a video</td>
+			<td>Notes</td>
+			<td>Price</td>
+			<td>Pictures</td>
+		</tr>
+		<tr>
+			<td><a href="/robots/{{ robot.id }}/">{{ robot.name }}</a></td>
+			<td>{{ robot.producer }}</a></td>
+			<td>{{ robot.country }}</a></td>
+			<td>
+				{% if robot.link %}<a href="{{ robot.link }}">LINK</a>{% endif %}
+			</td>
+			<td>
+				{% if robot.videoLink %}<a href="{{ robot.videoLink }}">VIDEO LINK</a>{% endif %}
+			</td>
+			<td>{{ robot.notes }}</a></td>
+			<td>{{ robot.price }}</a></td>
+			<td>
+				{% if robot.robotimage_set %}
+					<ul class="robotImageList">
+						{% for robotImage in robot.robotimage_set.all %}
+							<li><a href="{{ robotImage.image.url }}">
+								<img src="{{ robotImage.image.url }}" />
+							</a></li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</td>
+		</tr>
+	</table>
+{% else %}
+	<p>No such robot.</p>
+{% endif %}
+{% endblock %}
+
+{% block sidebar %}
+<p>Add a robot</p>
+{% endblock %}

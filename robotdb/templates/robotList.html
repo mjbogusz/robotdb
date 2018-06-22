@@ -1,25 +1,63 @@
 {% extends "base.html" %}
 
-{% block title %}RobotDB{% endblock %}
-
 {% block content %}
 {% if robotList %}
 	<p>Robots:</p>
-	<ul>
-	{% for robot in robotList %}
-		<li>
-			<a href="/robot/{{ robot.id }}/">{{ robot.name }}</a>
-			{% if robot.robotimage_set %}
-				<ul>
-				{% for robotImage in robot.robotimage_set.all %}
-					<li>{{ robotImage.image.url }}<img src="{{ robotImage.image.url }}" /></li>
-				{% endfor %}
-				</ul>
-			{% endif %}
-		</li>
-	{% endfor %}
-	</ul>
+	<table class="robotList">
+		<thead><tr>
+			<th>Name</th>
+			<th>Producer</th>
+			<th>Country</th>
+			<th>Website</th>
+			<th>Video</th>
+			<th>Notes</th>
+			<th>Price (EUR)</th>
+			<th>Pictures</th>
+		</tr></thead>
+		<tbody>
+		{% for robot in robotList %}
+			<tr>
+				<td><a href="/robots/{{ robot.id }}/">{{ robot.name }}</a></td>
+				<td>{{ robot.producer }}</a></td>
+				<td>{{ robot.country }}</a></td>
+				<td>
+					{% if robot.link %}<a href="{{ robot.link }}">LINK</a>{% endif %}
+				</td>
+				<td>
+					{% if robot.videoLink %}<a href="{{ robot.videoLink }}">VIDEO LINK</a>{% endif %}
+				</td>
+				<td>{{ robot.notes }}</a></td>
+				<td>{{ robot.price }}</a></td>
+				<td>
+					{% if robot.robotimage_set %}
+						<ul class="robotImageList">
+							{% for robotImage in robot.robotimage_set.all %}
+								<li><a href="{{ robotImage.image.url }}">
+									<img src="{{ robotImage.thumbnail.url }}" />
+								</a></li>
+							{% endfor %}
+						</ul>
+					{% endif %}
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+		<tfoot><tr>
+			<th>Name</th>
+			<th>Producer</th>
+			<th>Country</th>
+			<th>Link</th>
+			<th>Link to a video</th>
+			<th>Notes</th>
+			<th>Price</th>
+			<th>Pictures</th>
+		</tr></tfoot>
+	</table>
 {% else %}
 	<p>No robots.</p>
 {% endif %}
+{% endblock %}
+
+{% block sidebar %}
+<p>Add a robot</p>
 {% endblock %}
