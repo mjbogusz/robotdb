@@ -10,9 +10,11 @@ class Robot(models.Model):
 	notes = models.CharField('Additional notes', max_length = 2000, blank = True)
 
 	def save(self, *args, **kwargs):
-		if self.link and self.link[0:3] != 'http':
+		if self.link and self.link[0:4] != 'http':
 			self.link = 'http://' + self.link
-		super(models.Model, self).save(*args, **kwargs)
+		if self.videoLink and self.videoLink[0:4] != 'http':
+			self.videoLink = 'http://' + self.videoLink
+		super(Robot, self).save(*args, **kwargs)
 
 	def __str__(self):
 		return self.name + ' (' + self.producer + ')'
