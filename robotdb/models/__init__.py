@@ -3,8 +3,8 @@ from .Article import Article
 from .Feature import Feature
 from .Project import Project
 from .Robot import Robot
+from .RobotFeature import RobotFeature
 from .RobotImage import RobotImage
-
 from .utils import getRobotImagePath
 
 __all__ = [
@@ -13,6 +13,7 @@ __all__ = [
 	'Feature',
 	'Project',
 	'Robot',
+	'RobotFeature',
 	'RobotImage',
 	'getRobotImagePath',
 ]
