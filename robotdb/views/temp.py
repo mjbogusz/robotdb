@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django_tables2 import RequestConfig
 
-from .models import Application, Article, Feature, Project, Robot
-from .tables import ApplicationTable, ArticleTable, FeatureTable, ProjectTable, RobotTable
+from robotdb.models import Application, Article, Feature, Project
+from robotdb.tables import ApplicationTable, ArticleTable, FeatureTable, ProjectTable
 
 def index(request):
 	return render(request, 'index.html')
@@ -17,8 +17,9 @@ def applicationList(request):
 	})
 
 def applicationDetail(request, applicationID):
+	application = get_object_or_404(Application, pk = applicationID)
 	return render(request, 'applicationDetails.html', {
-		'application': Application.objects.get(id = applicationID)
+		'application': application
 	})
 
 def articleList(request):
@@ -31,8 +32,9 @@ def articleList(request):
 	})
 
 def articleDetail(request, articleID):
+	article = get_object_or_404(Article, pk = articleID)
 	return render(request, 'articleDetails.html', {
-		'article': Article.objects.get(id = articleID)
+		'article': article
 	})
 
 def featureList(request):
@@ -45,8 +47,9 @@ def featureList(request):
 	})
 
 def featureDetail(request, featureID):
+	feature = get_object_or_404(Feature, pk = featureID)
 	return render(request, 'featureDetails.html', {
-		'feature': Feature.objects.get(id = featureID)
+		'feature': feature
 	})
 
 def projectList(request):
@@ -59,20 +62,7 @@ def projectList(request):
 	})
 
 def projectDetail(request, projectID):
+	project = get_object_or_404(Project, pk = projectID)
 	return render(request, 'projectDetails.html', {
-		'project': Project.objects.get(id = projectID)
-	})
-
-def robotList(request):
-	robots = Robot.objects.all()
-	robotTable = RobotTable(robots)
-	RequestConfig(request).configure(robotTable)
-	return render(request, 'robotList.html', {
-		'count': len(robots),
-		'robotTable': robotTable,
-	})
-
-def robotDetail(request, robotID):
-	return render(request, 'robotDetails.html', {
-		'robot': Robot.objects.get(id = robotID)
+		'project': project
 	})

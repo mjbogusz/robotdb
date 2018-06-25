@@ -1,15 +1,18 @@
 {% extends "base.html" %}
 {% load render_table from django_tables2 %}
 
+{% block title %}
+	<h1>Articles</h1>
+{% endblock %}
+
 {% block content %}
 {% if count %}
-	<h2>Articles:</h2>
 	{% render_table articleTable %}
 {% else %}
 	<p>No articles.</p>
 {% endif %}
 {% endblock %}
 
-{% block sidebar %}
-<p>Add an article</p>
+{% block topMenu %}
+<a href="articles/add" class="button">Add an article</a>
 {% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{% if robot %}
+		<h1>Editing a robot</h1>
+	{% else %}
+		<h1>Adding a robot</h1>
+	{% endif %}
+{% endblock %}
+
+{% block topMenu %}
+<a href="{% url 'robotList' %}" class="button">Back to List</a>
+{% endblock %}
+
+{% block content %}
+	{% if robot %}
+		<form class="entryEditForm" action="{% url 'robotEdit' robot.id %}" method="post">
+	{% else %}
+		<form class="entryEditForm" action="{% url 'robotAdd' %}" method="post">
+	{% endif %}
+
+	{% csrf_token %}
+	<h3>Robot properties:</h3>
+	<table class="pure-table entryDetails entryEditTable">
+		{{ robotForm }}
+	</table>
+
+	<div class="entryEditSubmit">
+		<input type="submit" value="Save" class="button" />
+	</div>
+	</form>
+
+{% endblock %}

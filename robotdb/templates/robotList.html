@@ -1,15 +1,18 @@
 {% extends "base.html" %}
 {% load render_table from django_tables2 %}
 
+{% block title %}
+	<h1>Robots</h1>
+{% endblock %}
+
+{% block topMenu %}
+<a href="robots/add" class="button">Add a robot</a>
+{% endblock %}
+
 {% block content %}
 {% if count %}
-	<h2>Robots:</h2>
 	{% render_table robotTable %}
 {% else %}
 	<p>No robots.</p>
 {% endif %}
-{% endblock %}
-
-{% block sidebar %}
-<p>Add a robot</p>
 {% endblock %}

@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}
+	<h1>Robot details</h1>
+{% endblock %}
+
+{% block topMenu %}
+<a href="{% url 'robotList' %}" class="button">Back to List</a>
+<a href="{% url 'robotEdit' robot.id %}" class="button">Edit this robot</a>
+<a href="{% url 'robotAdd' %}" class="button">Add another</a>
+{% endblock %}
+
+{% block content %}
+{% if robot %}
+	<h3>Robot properties:</h3>
+	<table class="pure-table robotDetails">
+		<tr>
+			<th>Name</th>
+			<td>{{ robot.name }}</td>
+		</tr>
+		<tr>
+			<th>Producer</th>
+			<td>{{ robot.producer }}</a></td>
+		</tr>
+		<tr>
+			<th>Country</th>
+			<td>{{ robot.country }}</a></td>
+		</tr>
+		<tr>
+			<th>Link</th>
+			<td>{% if robot.link %}<a href="{{ robot.link }}">LINK</a>{% endif %}</td>
+		</tr>
+		<tr>
+			<th>Link to a video</th>
+			<td>{% if robot.videoLink %}<a href="{{ robot.videoLink }}">VIDEO LINK</a>{% endif %}</td>
+		</tr>
+		<tr>
+			<th>Notes</th>
+			<td>{{ robot.notes }}</a></td>
+		</tr>
+		<tr>
+			<th>Price</th>
+			<td>{{ robot.price }}</a></td>
+		</tr>
+	</table>
+
+	<h3>Features:</h3>
+	<table class="pure-table robotFeatures featureList">
+		<thead><tr>
+			<th>Available</th>
+			<th>Name</th>
+			<th>Parameters</th>
+			<th>Notes</th>
+		</tr></thead>
+		<tbody>
+			{% for rf in robot.robotfeature_set.all %}
+			<tr>
+				<td>
+					{% if rf.available %}
+						<span class="feature_true">✔</span>
+					{% else %}
+						<span class="feature_false">✘</span>
+					{% endif %}
+				</td>
+				<td>{{ rf.feature.name }}</td>
+				<td>{{ rf.feature.parameters }}</td>
+				<td>{{ rf.feature.notes }}</td>
+			</tr>
+			{% endfor %}
+			{% for feature in unknownFeatures %}
+			<tr>
+				<td><span class="feature_unknown">?</span></td>
+				<td>{{ feature.name }}</td>
+				<td>{{ feature.parameters }}</td>
+				<td>{{ feature.notes }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<h3>Photos:</h3>
+	<div class="robotPhotos">
+		<ul class="robotImageList">
+			{% for robotImage in robot.robotimage_set.all %}
+				<li><a href="{{ robotImage.image.url }}">
+					<img src="{{ robotImage.thumbnail.url }}" />
+				</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+{% else %}
+	<p>No such robot.</p>
+{% endif %}
+{% endblock %}
+
+{% block sidebar %}
+<p>Add a robot</p>
+{% endblock %}

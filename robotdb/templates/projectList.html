@@ -1,15 +1,18 @@
 {% extends "base.html" %}
 {% load render_table from django_tables2 %}
 
+{% block title %}
+	<h1>Projects</h1>
+{% endblock %}
+
 {% block content %}
 {% if count %}
-	<h2>Projects:</h2>
 	{% render_table projectTable %}
 {% else %}
 	<p>No projects.</p>
 {% endif %}
 {% endblock %}
 
-{% block sidebar %}
-<p>Add an project</p>
+{% block topMenu %}
+<a href="projects/add" class="button">Add a project</a>
 {% endblock %}

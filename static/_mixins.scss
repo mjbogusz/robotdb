@@ -1,0 +1,39 @@
+@mixin font-size($size) {
+	font-size: $size;
+	font-size: calculateRem($size);
+}
+
+@mixin transition($args...) {
+	-webkit-transition: $args;
+	-moz-transition: $args;
+	-ms-transition: $args;
+	-o-transition: $args;
+	transition: $args;
+}
+
+@mixin transform($args...) {
+	-webkit-transform: $args;
+	-moz-transform: $args;
+	-ms-transform: $args;
+	-o-transform: $args;
+	transform: $args;
+}
+
+@mixin rounded($radius:0.25rem) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	border-radius: $radius;
+}
+
+@mixin rgba-background($color, $opacity: 1) {
+	background: $color;
+	background: rgba($color, $opacity);
+}
+
+@mixin box-sizing($args...) {
+	-webkit-box-sizing: $args;
+	-moz-box-sizing: $args;
+	-ms-box-sizing: $args;
+	-o-box-sizing: $args;
+	box-sizing: $args;
+}

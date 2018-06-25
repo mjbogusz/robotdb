@@ -1,4 +1,4 @@
-// @import 'mixins';
+@import 'mixins';
 
 $font-color: #dddddd !default;
 $font-color-light: lighten($font-color, 10%) !default;
@@ -10,12 +10,25 @@ $font-color-darkgray: darken($font-color-gray, 10%) !default;
 $background-color: #302010 !default;
 $background-color-dark: darken($background-color, 5%) !default;
 $background-color-light: lighten($background-color, 5%) !default;
+$color-green-dark: #105010 !default;
 
 body {
 	display: flex;
 	height: 100vh;
 	color: $font-color;
 	background-color: $background-color;
+
+	font-size: 12pt;
+}
+
+a {
+	color: white;
+	&:active {
+		color: lightpink;
+	}
+	&:visited {
+		color: lightblue;
+	}
 }
 
 #main-wrapper {
@@ -31,13 +44,32 @@ body {
 }
 
 #content {
-	margin: 1rem;
 	padding: 1rem 2rem;
+	font-size: 10pt;
 }
 
-#sidebar {
-	margin: 1rem;
-	padding: 1rem;
+#topMenu {
+	padding: 1rem 2rem;
+	margin-top: 1rem;
+}
+
+.button {
+	background-color: $background-color-light;
+	display: inline-block;
+	padding: 1em;
+	line-height: 1;
+	white-space: nowrap;
+	text-align: center;
+	text-decoration: none;
+
+	border-width: 0;
+	border-radius: 0.5em;
+
+	@include transition(all 0.3s);
+
+	&:hover {
+		background-color: $background-color-dark;
+	}
 }
 
 #navbar {
@@ -78,14 +110,20 @@ body {
 
 	td, th {
 		border: 1px solid $font-color-darkgray !important;
+		padding: 0.5em !important;
 	}
 
-	thead {
+	th {
 		background-color: $background-color-light !important;
 		color: $font-color-light !important;
 		a {
 			color: $font-color-light !important;
 		}
+	}
+
+	ul {
+		margin: 0;
+		padding: 1em;
 	}
 
 	.tableImageList {
@@ -105,5 +143,59 @@ body {
 	img {
 		max-height: 100px;
 		max-width: 100px;
+	}
+}
+
+.entryDetails {
+	th {
+		white-space: nowrap;
+	}
+	td {
+		width: 100%;
+	}
+}
+
+.entryEditForm {
+	.entryEditTable {
+		width: 100%;
+
+		td {
+			color: $background-color-dark;
+		}
+		input, select, textarea {
+			@include box-sizing(border-box);
+			width: 100%;
+			padding: 0.5rem 0;
+		}
+		select, textarea {
+			padding: 0.5rem;
+		}
+	}
+
+	.entryEditSubmit {
+		font-size: 1rem;
+		margin: 1rem;
+		text-align: right;
+
+		input {
+			padding: 1rem 2rem;
+			background-color: $color-green-dark;
+		}
+	}
+}
+
+.featureList {
+	white-space: nowrap;
+	.feature_true {
+		font-weight: bold;
+		color: green;
+	}
+	.feature_false {
+		font-weight: bold;
+		color: red;
+	}
+	.feature_unknown {
+		font-weight: bold;
+		color: yellow;
 	}
 }
