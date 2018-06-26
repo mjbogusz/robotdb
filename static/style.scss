@@ -160,9 +160,9 @@ a {
 		width: 100%;
 
 		td {
-			color: $background-color-dark;
 		}
 		input, select, textarea {
+			color: $background-color-dark;
 			@include box-sizing(border-box);
 			width: 100%;
 			padding: 0.5rem 0;
@@ -180,6 +180,14 @@ a {
 		input {
 			padding: 1rem 2rem;
 			background-color: $color-green-dark;
+		}
+	}
+
+	.robotFeatureSelectInput {
+		list-style: none;
+		ul, ul>li {
+			display: inline-block;
+			list-style: inherit;
 		}
 	}
 }

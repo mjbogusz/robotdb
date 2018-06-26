@@ -1,17 +1,10 @@
 from django.shortcuts import render, get_object_or_404, reverse
-from django import forms
 from django_tables2 import RequestConfig
 from django.http import HttpResponseRedirect
 
 from robotdb.models import Feature, Robot
 from robotdb.tables import RobotTable
-
-class RobotForm(forms.ModelForm):
-	notes = forms.CharField(widget = forms.Textarea)
-
-	class Meta:
-		model = Robot
-		exclude = ()
+from robotdb.forms import RobotForm
 
 def robotList(request):
 	robots = Robot.objects.all()
