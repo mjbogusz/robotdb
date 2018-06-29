@@ -1,5 +1,7 @@
-import django_tables2 as tables
 from django.utils.html import format_html
+from django.urls import reverse
+import django_tables2 as tables
+
 from robotdb.models import Feature, Robot
 
 class RobotTable(tables.Table):
@@ -19,10 +21,11 @@ class RobotTable(tables.Table):
 	})
 
 	def render_id(self, record, value):
-		return format_html('<a href="/robots/{}/">{}</a>', record.id, value)
+		href = reverse('robotDetail', kwargs = {'robotID': record.id})
+		return format_html('<a href="{}">{}</a>', href, value)
 
 	def render_name(self, record, value):
-		return format_html('<a href="/robots/{}/">{}</a>', record.id, value)
+		return self.render_id(record, value)
 
 	def render_link(self, value):
 		return format_html('<a href="{}">LINK</a>', value)
@@ -34,7 +37,8 @@ class RobotTable(tables.Table):
 		applications = value.all()
 		html = '<ul class="applicationList">'
 		for i in applications:
-			html += format_html('<li><a href="applications/{}/">{}</a></li>', i.id, i)
+			href = reverse('applicationDetail', kwargs = {'applicationID': i.id})
+			html += format_html('<li><a href="{}">{}</a></li>', href, i)
 		html += '</ul>'
 		return format_html(html)
 
@@ -42,7 +46,8 @@ class RobotTable(tables.Table):
 		articles = value.all()
 		html = '<ul class="articleList">'
 		for i in articles:
-			html += format_html('<li><a href="articles/{}/">{}</a></li>', i.id, i)
+			href = reverse('articleDetail', kwargs = {'articleID': i.id})
+			html += format_html('<li><a href="{}">{}</a></li>', href, i)
 		html += '</ul>'
 		return format_html(html)
 
@@ -54,14 +59,16 @@ class RobotTable(tables.Table):
 				html += '<p><span class="feature_true">✔</span> '
 			else:
 				html += '<p><span class="feature_false">✘</span> '
-			html += format_html('<a href="features/{}/">{}</a>', rf.feature_id, rf.feature)
+			href = reverse('featureDetail', kwargs = {'featureID': rf.feature_id})
+			html += format_html('<a href="{}">{}</a>', href, rf.feature)
 			html += '</p>'
 
 		knownFeatureIDs = robotFeatures.values_list('feature_id', flat = True)
 		unknownFeatures = Feature.objects.exclude(id__in = knownFeatureIDs)
 		for f in unknownFeatures:
 			html += '<p><span class="feature_unknown">?</span> '
-			html += format_html('<a href="features/{}/">{}</a>', f.id, f)
+			href = reverse('featureDetail', kwargs = {'featureID': f.id})
+			html += format_html('<a href="{}">{}</a>', href, f)
 			html += '</p>'
 
 		return format_html(html)
@@ -70,7 +77,8 @@ class RobotTable(tables.Table):
 		projects = value.all()
 		html = '<ul class="projectList">'
 		for i in projects:
-			html += format_html('<li><a href="projects/{}/">{}</a></li>', i.id, i)
+			href = reverse('projectDetail', kwargs = {'projectID': i.id})
+			html += format_html('<li><a href="{}">{}</a></li>', href, i)
 		html += '</ul>'
 		return format_html(html)
 
