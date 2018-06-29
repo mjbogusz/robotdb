@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 from .Application import Application
 from .Article import Article
@@ -27,6 +28,9 @@ class Robot(models.Model):
 
 		# Run inherited save()
 		super(Robot, self).save(*args, **kwargs)
+
+	def get_absolute_url(self):
+		return reverse('robotDetail', kwargs = {'robotID': self.pk})
 
 	def __str__(self):
 		return self.name + ' (' + self.producer + ')'
