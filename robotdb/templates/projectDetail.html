@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+	<h1>Project details</h1>
+{% endblock %}
+
+{% block topMenu %}
+<a href="{% url 'projectList' %}" class="button">Back to List</a>
+<a href="{% url 'projectUpdate' project.id %}" class="button">Edit this project</a>
+<a href="{% url 'projectCreate' %}" class="button">Add another</a>
+{% endblock %}
+
+{% block content %}
+	<h3>Project properties:</h3>
+	<table class="pure-table entryDetails">
+		<tr>
+			<th>Name</th>
+			<td>{{ project.name }}</td>
+		</tr>
+		<tr>
+			<th>Year</th>
+			<td>{{ project.year }}</a></td>
+		</tr>
+		<tr>
+			<th>Link</th>
+			<td>{% if project.link %}<a href="{{ project.link }}">LINK</a>{% endif %}</td>
+		</tr>
+		<tr>
+			<th>Notes</th>
+			<td>{{ project.notes }}</a></td>
+		</tr>
+	</table>
+{% endblock %}

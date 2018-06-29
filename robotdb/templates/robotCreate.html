@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+	<h1>Adding a robot</h1>
+{% endblock %}
+
+{% block topMenu %}
+<a href="{% url 'robotList' %}" class="button">Back to List</a>
+{% endblock %}
+
+{% block content %}
+	<form class="entryEditForm" action="{% url 'robotCreate' %}" method="post">
+		{% csrf_token %}
+		<h3>Robot properties:</h3>
+		<table class="pure-table entryDetails entryEditTable">
+			{{ form.as_table }}
+		</table>
+
+		<div class="entryEditSubmit">
+			<input type="submit" value="Save" class="button" />
+		</div>
+	</form>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+	<h1>Editing an feature</h1>
+{% endblock %}
+
+{% block topMenu %}
+<a href="{% url 'featureDetail' feature.id %}" class="button">Back to details</a>
+<a href="{% url 'featureList' %}" class="button">Back to List</a>
+{% endblock %}
+
+{% block content %}
+	<form class="entryEditForm" action="{% url 'featureUpdate' feature.id %}" method="post">
+		{% csrf_token %}
+		<h3>Feature properties:</h3>
+
+		<table class="pure-table entryDetails entryEditTable">
+			{{ form.as_table }}
+		</table>
+
+		<div class="entryEditSubmit">
+			<input type="submit" value="Save" class="button" />
+		</div>
+{% endblock %}

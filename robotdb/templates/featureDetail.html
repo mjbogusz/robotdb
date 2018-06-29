@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+	<h1>Feature details</h1>
+{% endblock %}
+
+{% block topMenu %}
+<a href="{% url 'featureList' %}" class="button">Back to List</a>
+<a href="{% url 'featureUpdate' feature.id %}" class="button">Edit this feature</a>
+<a href="{% url 'featureCreate' %}" class="button">Add another</a>
+{% endblock %}
+
+{% block content %}
+	<h3>Feature properties:</h3>
+	<table class="pure-table entryDetails">
+		<tr>
+			<th>Name</th>
+			<td>{{ feature.name }}</td>
+		</tr>
+		<tr>
+			<th>Parameters</th>
+			<td>{{ feature.parameters }}</a></td>
+		</tr>
+		<tr>
+			<th>Notes</th>
+			<td>{{ feature.notes }}</a></td>
+		</tr>
+	</table>
+{% endblock %}

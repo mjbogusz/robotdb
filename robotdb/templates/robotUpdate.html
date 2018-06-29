@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+	<h1>Editing a robot</h1>
+{% endblock %}
+
+{% block topMenu %}
+<a href="{% url 'robotDetail' robot.id %}" class="button">Back to details</a>
+<a href="{% url 'robotList' %}" class="button">Back to List</a>
+<a href="{% url 'admin:robotdb_robot_change' robot.id %}" class="button">Advanced edit (Features, Applications, Photos etc)</a>
+{% endblock %}
+
+{% block content %}
+	<form class="entryEditForm" action="{% url 'robotUpdate' robot.id %}" method="post">
+		{% csrf_token %}
+		<h3>Robot properties:</h3>
+
+		<table class="pure-table entryDetails entryEditTable">
+			{{ form.as_table }}
+		</table>
+
+		<div class="entryEditSubmit">
+			<input type="submit" value="Save" class="button" />
+		</div>
+{% endblock %}

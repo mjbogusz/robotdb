@@ -1,49 +1,69 @@
-from django.shortcuts import render, get_object_or_404, reverse
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.forms import widgets
 from django_tables2 import RequestConfig
-from django.http import HttpResponseRedirect
 
-from robotdb.models import Feature, Robot
+from robotdb.models import Robot, Feature
 from robotdb.tables import RobotTable
-from robotdb.forms import RobotForm
 
-def robotList(request):
-	robots = Robot.objects.all()
-	robotTable = RobotTable(robots)
-	RequestConfig(request).configure(robotTable)
-	return render(request, 'robotList.html', {
-		'count': len(robots),
-		'robotTable': robotTable,
-	})
+class RobotCreateView(CreateView):
+	model = Robot
+	template_name = 'robotCreate.html'
+	fields = (
+		'name',
+		'producer',
+		'country',
+		'link',
+		'videoLink',
+		'price',
+		'notes',
+	)
 
-def robotEdit(request, robotID):
-	# First, check if robot exists
-	if robotID:
-		robot = get_object_or_404(Robot, pk = robotID)
-	else:
-		robot = None
+	def get_form(self, **kwargs):
+		form = super(RobotCreateView, self).get_form(**kwargs)
+		form.fields['notes'].widget = widgets.Textarea()
+		return form
 
-	# Then check if we're opening new add/edit view or handling sent data
-	if request.method == 'GET':
-		robotForm = RobotForm(instance = robot)
-	else:
-		robotForm = RobotForm(request.POST)
+class RobotDetailView(DetailView):
+	model = Robot
+	template_name = 'robotDetail.html'
+	context_object_name = 'robot'
+	pk_url_kwarg = 'robotID'
 
-	# Display form with data
-	if request.method == 'GET' or not robotForm.is_valid():
-		return render(request, 'robotEdit.html', {
-			'robotForm': robotForm.as_table(),
-			'robot': robot,
-		})
+	def get_context_data(self, **kwargs):
+		context = super(RobotDetailView, self).get_context_data(**kwargs)
+		knownFeatureIDs = self.object.robotfeature_set.all().values_list('feature_id', flat = True)
+		context['unknownFeatures'] = Feature.objects.exclude(id__in = knownFeatureIDs)
+		return context
 
-	# Handle valid sent data
-	### TODO
-	return HttpResponseRedirect(reverse('robotList'))
+class RobotUpdateView(UpdateView):
+	model = Robot
+	template_name = 'robotUpdate.html'
+	pk_url_kwarg = 'robotID'
 
-def robotView(request, robotID):
-	robot = Robot.objects.get(id = robotID)
-	knownFeatureIDs = robot.robotfeature_set.all().values_list('feature_id', flat = True)
-	unknownFeatures = Feature.objects.exclude(id__in = knownFeatureIDs)
-	return render(request, 'robotView.html', {
-		'robot': Robot.objects.get(id = robotID),
-		'unknownFeatures': unknownFeatures
-	})
+	fields = (
+		'name',
+		'producer',
+		'country',
+		'link',
+		'videoLink',
+		'price',
+		'notes',
+	)
+
+	def get_form(self, **kwargs):
+		form = super(RobotUpdateView, self).get_form(**kwargs)
+		form.fields['notes'].widget = widgets.Textarea()
+		return form
+
+class RobotListView(ListView):
+	model = Robot
+	template_name = 'robotList.html'
+
+	def get_context_data(self, **kwargs):
+		context = super(RobotListView, self).get_context_data(**kwargs)
+		robotQuerySet = Robot.objects.all()
+		robotTable = RobotTable(robotQuerySet)
+		RequestConfig(self.request).configure(robotTable)
+		context['robotTable'] = robotTable
+		context['robotCount'] = len(robotQuerySet)
+		return context

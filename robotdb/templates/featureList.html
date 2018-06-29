@@ -5,14 +5,14 @@
 	<h1>Features</h1>
 {% endblock %}
 
+{% block topMenu %}
+<a href="{% url 'featureCreate' %}" class="button">Add a feature</a>
+{% endblock %}
+
 {% block content %}
-{% if count %}
+{% if featureCount %}
 	{% render_table featureTable %}
 {% else %}
 	<p>No features.</p>
 {% endif %}
-{% endblock %}
-
-{% block topMenu %}
-<a href="features/add" class="button">Add a feature</a>
 {% endblock %}

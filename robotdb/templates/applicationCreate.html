@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+	<h1>Adding an Application</h1>
+{% endblock %}
+
+{% block topMenu %}
+<a href="{% url 'applicationList' %}" class="button">Back to List</a>
+{% endblock %}
+
+{% block content %}
+	<form class="entryEditForm" action="{% url 'applicationCreate' %}" method="post">
+		{% csrf_token %}
+		<h3>Application properties:</h3>
+		<table class="pure-table entryDetails entryEditTable">
+			{{ form.as_table }}
+		</table>
+
+		<div class="entryEditSubmit">
+			<input type="submit" value="Save" class="button" />
+		</div>
+	</form>
+{% endblock %}

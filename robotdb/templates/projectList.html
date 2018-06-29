@@ -5,14 +5,14 @@
 	<h1>Projects</h1>
 {% endblock %}
 
+{% block topMenu %}
+<a href="{% url 'projectCreate' %}" class="button">Add a project</a>
+{% endblock %}
+
 {% block content %}
-{% if count %}
+{% if projectCount %}
 	{% render_table projectTable %}
 {% else %}
 	<p>No projects.</p>
 {% endif %}
-{% endblock %}
-
-{% block topMenu %}
-<a href="projects/add" class="button">Add a project</a>
 {% endblock %}

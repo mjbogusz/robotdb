@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+	<h1>Article details</h1>
+{% endblock %}
+
+{% block topMenu %}
+<a href="{% url 'articleList' %}" class="button">Back to List</a>
+<a href="{% url 'articleUpdate' article.id %}" class="button">Edit this article</a>
+<a href="{% url 'articleCreate' %}" class="button">Add another</a>
+{% endblock %}
+
+{% block content %}
+	<h3>Article properties:</h3>
+	<table class="pure-table entryDetails">
+		<tr>
+			<th>Name</th>
+			<td>{{ article.name }}</td>
+		</tr>
+		<tr>
+			<th>Year</th>
+			<td>{{ article.year }}</a></td>
+		</tr>
+		<tr>
+			<th>Link</th>
+			<td>{% if article.link %}<a href="{{ article.link }}">LINK</a>{% endif %}</td>
+		</tr>
+		<tr>
+			<th>Bibtex</th>
+			<td>{% if article.bibtex %}
+				<pre class="bibtex">{{ article.bibtex }}</pre>
+			{% endif %}</td>
+		</tr>
+		<tr>
+			<th>Notes</th>
+			<td>{{ article.notes }}</a></td>
+		</tr>
+	</table>
+{% endblock %}

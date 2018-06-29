@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+	<h1>Editing an project</h1>
+{% endblock %}
+
+{% block topMenu %}
+<a href="{% url 'projectDetail' project.id %}" class="button">Back to details</a>
+<a href="{% url 'projectList' %}" class="button">Back to List</a>
+{% endblock %}
+
+{% block content %}
+	<form class="entryEditForm" action="{% url 'projectUpdate' project.id %}" method="post">
+		{% csrf_token %}
+		<h3>Project properties:</h3>
+
+		<table class="pure-table entryDetails entryEditTable">
+			{{ form.as_table }}
+		</table>
+
+		<div class="entryEditSubmit">
+			<input type="submit" value="Save" class="button" />
+		</div>
+{% endblock %}

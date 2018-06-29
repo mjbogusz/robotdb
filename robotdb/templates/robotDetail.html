@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}
+	<h1>Robot details</h1>
+{% endblock %}
+
+{% block topMenu %}
+<a href="{% url 'robotList' %}" class="button">Back to List</a>
+<a href="{% url 'robotUpdate' robot.id %}" class="button">Edit this robot</a>
+<a href="{% url 'robotCreate' %}" class="button">Add another</a>
+{% endblock %}
+
+{% block content %}
+	<h3>Robot properties:</h3>
+	<table class="pure-table entryDetails">
+		<tr>
+			<th>Name</th>
+			<td>{{ robot.name }}</td>
+		</tr>
+		<tr>
+			<th>Producer</th>
+			<td>{{ robot.producer }}</a></td>
+		</tr>
+		<tr>
+			<th>Country</th>
+			<td>{{ robot.country }}</a></td>
+		</tr>
+		<tr>
+			<th>Link</th>
+			<td>{% if robot.link %}<a href="{{ robot.link }}">{{ robot.link }}</a>{% endif %}</td>
+		</tr>
+		<tr>
+			<th>Link to a video</th>
+			<td>{% if robot.videoLink %}<a href="{{ robot.videoLink }}">{{ robot.videoLink }}</a>{% endif %}</td>
+		</tr>
+		<tr>
+			<th>Notes</th>
+			<td>{{ robot.notes }}</a></td>
+		</tr>
+		<tr>
+			<th>Price</th>
+			<td>{{ robot.price }}</a></td>
+		</tr>
+	</table>
+
+	<h3>Features:</h3>
+	<table class="pure-table featureList">
+		<thead><tr>
+			<th>Available</th>
+			<th>Name</th>
+			<th>Parameters</th>
+			<th>Notes</th>
+		</tr></thead>
+		<tbody>
+			{% for rf in robot.robotfeature_set.all %}
+			<tr>
+				<td>
+					{% if rf.available %}
+						<span class="feature_true">✔</span>
+					{% else %}
+						<span class="feature_false">✘</span>
+					{% endif %}
+				</td>
+				<td><a href="{% url 'featureDetail' rf.feature.pk %}">{{ rf.feature.name }}</a></td>
+				<td>{{ rf.feature.parameters }}</td>
+				<td>{{ rf.feature.notes }}</td>
+			</tr>
+			{% endfor %}
+			{% for feature in unknownFeatures %}
+			<tr>
+				<td><span class="feature_unknown">?</span></td>
+				<td><a href="{% url 'featureDetail' feature.pk %}">{{ feature.name }}</a></td>
+				<td>{{ feature.parameters }}</td>
+				<td>{{ feature.notes }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<h3>Articles:</h3>
+	<table class="pure-table featureList">
+		<thead><tr>
+			<th>Name</th>
+			<th>Year</th>
+			<th>Link</th>
+		</tr></thead>
+		<tbody>
+			{% for art in robot.articles.all %}
+			<tr>
+				<td><a href="{% url 'articleDetail' art.pk %}">{{ art.name }}</a></td>
+				<td>{{ art.year }}</td>
+				<td>{% if art.link %}<a href="art.link">{{ art.link }}</a>{% endif %}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<h3>Projects:</h3>
+	<table class="pure-table featureList">
+		<thead><tr>
+			<th>Name</th>
+			<th>Year</th>
+			<th>Link</th>
+		</tr></thead>
+		<tbody>
+			{% for project in robot.projects.all %}
+			<tr>
+				<td><a href="{% url 'articleDetail' project.pk %}">{{ project.name }}</a></td>
+				<td>{{ project.year }}</td>
+				<td>{% if project.link %}<a href="project.link">{{ project.link }}</a>{% endif %}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<h3>Applications:</h3>
+	<table class="pure-table featureList">
+		<thead><tr>
+			<th>Name</th>
+			<th>Mobility enhancement</th>
+			<th>Selfreliant care</th>
+			<th>Interpersonal interaction</th>
+			<th>Other</th>
+			<th>Notes</th>
+		</tr></thead>
+		<tbody>
+			{% for app in robot.applications.all %}
+			<tr>
+				<td><a href="{% url 'articleDetail' app.pk %}">{{ app.name }}</a></td>
+				<td>{{ app.get_mobility_display }}</td>
+				<td>{{ app.get_selfreliantCare_display }}</td>
+				<td>{{ app.get_interpersonalInteraction_display }}</td>
+				<td>{{ app.get_other_display }}</td>
+				<td>{{ app.notes }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<h3>Photos:</h3>
+	<div class="robotPhotos">
+		<ul class="robotImageList">
+			{% for robotImage in robot.robotimage_set.all %}
+				<li><a href="{{ robotImage.image.url }}">
+					<img src="{{ robotImage.thumbnail.url }}" />
+				</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}

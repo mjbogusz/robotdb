@@ -6,11 +6,11 @@
 {% endblock %}
 
 {% block topMenu %}
-<a href="robots/add" class="button">Add a robot</a>
+<a href="{% url 'robotCreate' %}" class="button">Add a robot</a>
 {% endblock %}
 
 {% block content %}
-{% if count %}
+{% if robotCount %}
 	{% render_table robotTable %}
 {% else %}
 	<p>No robots.</p>

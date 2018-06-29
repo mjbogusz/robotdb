@@ -153,6 +153,17 @@ a {
 	td {
 		width: 100%;
 	}
+
+	.bibtex {
+		font-family: monospace;
+		padding: 0.5rem;
+		margin: 0;
+		background-color: $background-color-dark;
+		color: $font-color-light;
+	}
+	#id_bibtex {
+		font-family: monospace;
+	}
 }
 
 .entryEditForm {

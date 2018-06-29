@@ -5,14 +5,14 @@
 	<h1>Applications</h1>
 {% endblock %}
 
+{% block topMenu %}
+<a href="{% url 'applicationCreate' %}" class="button">Add an application</a>
+{% endblock %}
+
 {% block content %}
-{% if count %}
+{% if applicationCount %}
 	{% render_table applicationTable %}
 {% else %}
 	<p>No applications.</p>
 {% endif %}
-{% endblock %}
-
-{% block topMenu %}
-<a href="applications/add" class="button">Add an application</a>
 {% endblock %}
