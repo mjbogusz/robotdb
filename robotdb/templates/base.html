@@ -35,6 +35,18 @@
 						<li class="pure-menu-item">
 							<a class="pure-menu-link" href="/applications">Applications</a>
 						</li>
+						{% if user.is_authenticated %}
+							<li class="pure-menu-item">
+								<ul class="pure-menu-list pure-submenu">
+									<li class="pure-menu-item">
+										<a class="pure-menu-link" href="{% url 'password_change' %}">Change pass</a>
+									</li>
+									<li class="pure-menu-item">
+										<a class="pure-menu-link" href="{% url 'logout' %}">Logout</a>
+									</li>
+								</ul>
+							</li>
+						{% endif %}
 					</ul>
 				</div>
 			</div>

@@ -40,7 +40,6 @@ a {
 	margin-bottom: 0;
 	margin-left: auto;
 	margin-right: auto;
-	/*padding-bottom: 8rem;*/
 }
 
 #content {
@@ -101,11 +100,19 @@ a {
 			text-decoration: none;
 		}
 	}
+
+	.pure-submenu {
+		font-size: 1rem;
+		line-height: 1.5rem;
+
+		li, a {
+			padding: 0 0.5em !important;
+		}
+	}
 }
 
 /* List elements */
 .pure-table {
-	width: 95%;
 	border: 1px solid $font-color-darkgray !important;
 
 	td, th {
@@ -125,6 +132,10 @@ a {
 		margin: 0;
 		padding: 1em;
 	}
+}
+
+.entryTable {
+	width: 95%;
 
 	.tableImageList {
 		width: 100%;
@@ -147,6 +158,8 @@ a {
 }
 
 .entryDetails {
+	width: 100%;
+
 	th {
 		white-space: nowrap;
 	}
@@ -166,40 +179,34 @@ a {
 	}
 }
 
-.entryEditForm {
-	.entryEditTable {
+.entryEditTable {
+	input, select, textarea {
+		color: $background-color-dark;
+		@include box-sizing(border-box);
 		width: 100%;
-
-		td {
-		}
-		input, select, textarea {
-			color: $background-color-dark;
-			@include box-sizing(border-box);
-			width: 100%;
-			padding: 0.5rem 0;
-		}
-		select, textarea {
-			padding: 0.5rem;
-		}
+		padding: 0.5rem 0;
 	}
-
-	.entryEditSubmit {
-		font-size: 1rem;
-		margin: 1rem;
-		text-align: right;
-
-		input {
-			padding: 1rem 2rem;
-			background-color: $color-green-dark;
-		}
+	select, textarea {
+		padding: 0.5rem;
 	}
+}
 
-	.robotFeatureSelectInput {
-		list-style: none;
-		ul, ul>li {
-			display: inline-block;
-			list-style: inherit;
-		}
+.robotFeatureSelectInput {
+	list-style: none;
+	ul, ul>li {
+		display: inline-block;
+		list-style: inherit;
+	}
+}
+
+.formSubmitButton {
+	font-size: 1rem;
+	margin: 1rem;
+	text-align: left;
+
+	input {
+		padding: 1rem 2rem;
+		background-color: $color-green-dark;
 	}
 }
 

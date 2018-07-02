@@ -15,16 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf import settings
+from django.conf.urls import include
 from django.conf.urls.static import static
 from django.urls import path
-
 from . import views
 
-# Application, Article, Feature, Project, Robot
+admin.site.site_header = 'RobotDB administration'
+admin.site.site_title = 'RobotDB'
+admin.site.index_title = 'Robot administration'
 
 urlpatterns = [
 	path('admin/', admin.site.urls),
-	path('', views.index, name = 'index'),
+	path('', views.IndexView.as_view(), name = 'index'),
+	path('accounts/', include('django.contrib.auth.urls')),
 	path('applications/', views.ApplicationListView.as_view(), name = 'applicationList'),
 	path('applications/add/', views.ApplicationCreateView.as_view(), name = 'applicationCreate'),
 	path('applications/<int:applicationID>/', views.ApplicationDetailView.as_view(), name = 'applicationDetail'),
