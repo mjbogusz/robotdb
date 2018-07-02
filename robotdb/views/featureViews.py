@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.forms import widgets
 from django_tables2 import RequestConfig
@@ -5,9 +6,9 @@ from django_tables2 import RequestConfig
 from robotdb.models import Feature
 from robotdb.tables import FeatureTable
 
-class FeatureCreateView(CreateView):
+class FeatureCreateView(LoginRequiredMixin, CreateView):
 	model = Feature
-	template_name = 'featureCreate.html'
+	template_name = 'views/feature/create.html'
 	fields = (
 		'name',
 		'parameters',
@@ -19,15 +20,15 @@ class FeatureCreateView(CreateView):
 		form.fields['notes'].widget = widgets.Textarea()
 		return form
 
-class FeatureDetailView(DetailView):
+class FeatureDetailView(LoginRequiredMixin, DetailView):
 	model = Feature
-	template_name = 'featureDetail.html'
+	template_name = 'views/feature/detail.html'
 	context_object_name = 'feature'
 	pk_url_kwarg = 'featureID'
 
-class FeatureUpdateView(UpdateView):
+class FeatureUpdateView(LoginRequiredMixin, UpdateView):
 	model = Feature
-	template_name = 'featureUpdate.html'
+	template_name = 'views/feature/update.html'
 	pk_url_kwarg = 'featureID'
 
 	fields = (
@@ -41,9 +42,9 @@ class FeatureUpdateView(UpdateView):
 		form.fields['notes'].widget = widgets.Textarea()
 		return form
 
-class FeatureListView(ListView):
+class FeatureListView(LoginRequiredMixin, ListView):
 	model = Feature
-	template_name = 'featureList.html'
+	template_name = 'views/feature/list.html'
 
 	def get_context_data(self, **kwargs):
 		context = super(FeatureListView, self).get_context_data(**kwargs)

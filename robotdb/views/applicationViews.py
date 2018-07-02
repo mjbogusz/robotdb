@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.forms import widgets
 from django_tables2 import RequestConfig
@@ -5,9 +6,9 @@ from django_tables2 import RequestConfig
 from robotdb.models import Application
 from robotdb.tables import ApplicationTable
 
-class ApplicationCreateView(CreateView):
+class ApplicationCreateView(LoginRequiredMixin, CreateView):
 	model = Application
-	template_name = 'applicationCreate.html'
+	template_name = 'views/application/create.html'
 	fields = (
 		'name',
 		'mobility',
@@ -22,15 +23,15 @@ class ApplicationCreateView(CreateView):
 		form.fields['notes'].widget = widgets.Textarea()
 		return form
 
-class ApplicationDetailView(DetailView):
+class ApplicationDetailView(LoginRequiredMixin, DetailView):
 	model = Application
-	template_name = 'applicationDetail.html'
+	template_name = 'views/application/detail.html'
 	context_object_name = 'application'
 	pk_url_kwarg = 'applicationID'
 
-class ApplicationUpdateView(UpdateView):
+class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
 	model = Application
-	template_name = 'applicationUpdate.html'
+	template_name = 'views/application/update.html'
 	pk_url_kwarg = 'applicationID'
 
 	fields = (
@@ -47,9 +48,9 @@ class ApplicationUpdateView(UpdateView):
 		form.fields['notes'].widget = widgets.Textarea()
 		return form
 
-class ApplicationListView(ListView):
+class ApplicationListView(LoginRequiredMixin, ListView):
 	model = Application
-	template_name = 'applicationList.html'
+	template_name = 'views/application/list.html'
 
 	def get_context_data(self, **kwargs):
 		context = super(ApplicationListView, self).get_context_data(**kwargs)

@@ -17,5 +17,5 @@ class ApplicationTable(tables.Table):
 	class Meta:
 		model = Application
 		attrs = {
-			'class': 'applicationTable pure-table'
+			'class': 'applicationTable entryTable pure-table'
 		}

@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.forms import widgets
 from django_tables2 import RequestConfig
@@ -5,9 +6,9 @@ from django_tables2 import RequestConfig
 from robotdb.models import Project
 from robotdb.tables import ProjectTable
 
-class ProjectCreateView(CreateView):
+class ProjectCreateView(LoginRequiredMixin, CreateView):
 	model = Project
-	template_name = 'projectCreate.html'
+	template_name = 'views/project/create.html'
 	fields = (
 		'name',
 		'link',
@@ -20,15 +21,15 @@ class ProjectCreateView(CreateView):
 		form.fields['notes'].widget = widgets.Textarea()
 		return form
 
-class ProjectDetailView(DetailView):
+class ProjectDetailView(LoginRequiredMixin, DetailView):
 	model = Project
-	template_name = 'projectDetail.html'
+	template_name = 'views/project/detail.html'
 	context_object_name = 'project'
 	pk_url_kwarg = 'projectID'
 
-class ProjectUpdateView(UpdateView):
+class ProjectUpdateView(LoginRequiredMixin, UpdateView):
 	model = Project
-	template_name = 'projectUpdate.html'
+	template_name = 'views/project/update.html'
 	pk_url_kwarg = 'projectID'
 
 	fields = (
@@ -43,9 +44,9 @@ class ProjectUpdateView(UpdateView):
 		form.fields['notes'].widget = widgets.Textarea()
 		return form
 
-class ProjectListView(ListView):
+class ProjectListView(LoginRequiredMixin, ListView):
 	model = Project
-	template_name = 'projectList.html'
+	template_name = 'views/project/list.html'
 
 	def get_context_data(self, **kwargs):
 		context = super(ProjectListView, self).get_context_data(**kwargs)

@@ -17,5 +17,5 @@ class FeatureTable(tables.Table):
 	class Meta:
 		model = Feature
 		attrs = {
-			'class': 'featureTable pure-table'
+			'class': 'featureTable entryTable pure-table'
 		}

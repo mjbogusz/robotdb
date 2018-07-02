@@ -21,5 +21,5 @@ class ProjectTable(tables.Table):
 	class Meta:
 		model = Project
 		attrs = {
-			'class': 'projectTable pure-table'
+			'class': 'projectTable entryTable pure-table'
 		}

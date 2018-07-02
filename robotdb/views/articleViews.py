@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.forms import widgets
 from django_tables2 import RequestConfig
@@ -5,9 +6,9 @@ from django_tables2 import RequestConfig
 from robotdb.models import Article
 from robotdb.tables import ArticleTable
 
-class ArticleCreateView(CreateView):
+class ArticleCreateView(LoginRequiredMixin, CreateView):
 	model = Article
-	template_name = 'articleCreate.html'
+	template_name = 'views/article/create.html'
 	fields = (
 		'name',
 		'link',
@@ -22,15 +23,15 @@ class ArticleCreateView(CreateView):
 		form.fields['notes'].widget = widgets.Textarea()
 		return form
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(LoginRequiredMixin, DetailView):
 	model = Article
-	template_name = 'articleDetail.html'
+	template_name = 'views/article/detail.html'
 	context_object_name = 'article'
 	pk_url_kwarg = 'articleID'
 
-class ArticleUpdateView(UpdateView):
+class ArticleUpdateView(LoginRequiredMixin, UpdateView):
 	model = Article
-	template_name = 'articleUpdate.html'
+	template_name = 'views/article/update.html'
 	pk_url_kwarg = 'articleID'
 
 	fields = (
@@ -47,9 +48,9 @@ class ArticleUpdateView(UpdateView):
 		form.fields['notes'].widget = widgets.Textarea()
 		return form
 
-class ArticleListView(ListView):
+class ArticleListView(LoginRequiredMixin, ListView):
 	model = Article
-	template_name = 'articleList.html'
+	template_name = 'views/article/list.html'
 
 	def get_context_data(self, **kwargs):
 		context = super(ArticleListView, self).get_context_data(**kwargs)

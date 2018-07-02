@@ -95,5 +95,5 @@ class RobotTable(tables.Table):
 	class Meta:
 		model = Robot
 		attrs = {
-			'class': 'robotTable pure-table'
+			'class': 'robotTable entryTable pure-table'
 		}

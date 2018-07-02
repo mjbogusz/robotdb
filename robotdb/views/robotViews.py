@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.forms import widgets
 from django_tables2 import RequestConfig
@@ -5,9 +6,9 @@ from django_tables2 import RequestConfig
 from robotdb.models import Robot, Feature
 from robotdb.tables import RobotTable
 
-class RobotCreateView(CreateView):
+class RobotCreateView(LoginRequiredMixin, CreateView):
 	model = Robot
-	template_name = 'robotCreate.html'
+	template_name = 'views/robot/create.html'
 	fields = (
 		'name',
 		'producer',
@@ -23,9 +24,9 @@ class RobotCreateView(CreateView):
 		form.fields['notes'].widget = widgets.Textarea()
 		return form
 
-class RobotDetailView(DetailView):
+class RobotDetailView(LoginRequiredMixin, DetailView):
 	model = Robot
-	template_name = 'robotDetail.html'
+	template_name = 'views/robot/detail.html'
 	context_object_name = 'robot'
 	pk_url_kwarg = 'robotID'
 
@@ -35,9 +36,9 @@ class RobotDetailView(DetailView):
 		context['unknownFeatures'] = Feature.objects.exclude(id__in = knownFeatureIDs)
 		return context
 
-class RobotUpdateView(UpdateView):
+class RobotUpdateView(LoginRequiredMixin, UpdateView):
 	model = Robot
-	template_name = 'robotUpdate.html'
+	template_name = 'views/robot/update.html'
 	pk_url_kwarg = 'robotID'
 
 	fields = (
@@ -55,9 +56,9 @@ class RobotUpdateView(UpdateView):
 		form.fields['notes'].widget = widgets.Textarea()
 		return form
 
-class RobotListView(ListView):
+class RobotListView(LoginRequiredMixin, ListView):
 	model = Robot
-	template_name = 'robotList.html'
+	template_name = 'views/robot/list.html'
 
 	def get_context_data(self, **kwargs):
 		context = super(RobotListView, self).get_context_data(**kwargs)

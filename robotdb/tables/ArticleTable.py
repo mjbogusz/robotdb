@@ -22,5 +22,5 @@ class ArticleTable(tables.Table):
 	class Meta:
 		model = Article
 		attrs = {
-			'class': 'articleTable pure-table'
+			'class': 'articleTable entryTable pure-table'
 		}
