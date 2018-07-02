@@ -118,3 +118,4 @@ media/
 *.css.map
 
 /static/style.css
+settings.py
