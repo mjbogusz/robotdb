@@ -31,7 +31,15 @@ class RobotTable(tables.Table):
 		return format_html('<a href="{}">LINK</a>', value)
 
 	def render_videoLink(self, value):
-		return format_html('<a href="{}">VIDEO LINK</a>', value)
+		links = value.split('\n')
+		if len(links) > 1:
+			html = '<ul>'
+			for i in links:
+				html += format_html('<li><a href="{}">VIDEO</a></li>', i)
+			html += '</ul>'
+		else:
+			html = format_html('<a href="{}">VIDEO</a>', value)
+		return format_html(html)
 
 	def render_applications(self, value):
 		applications = value.all()

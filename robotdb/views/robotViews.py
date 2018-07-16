@@ -21,6 +21,7 @@ class RobotCreateView(LoginRequiredMixin, CreateView):
 
 	def get_form(self, **kwargs):
 		form = super(RobotCreateView, self).get_form(**kwargs)
+		form.fields['videoLink'].widget = widgets.Textarea()
 		form.fields['notes'].widget = widgets.Textarea()
 		return form
 
@@ -34,6 +35,9 @@ class RobotDetailView(LoginRequiredMixin, DetailView):
 		context = super(RobotDetailView, self).get_context_data(**kwargs)
 		knownFeatureIDs = self.object.robotfeature_set.all().values_list('feature_id', flat = True)
 		context['unknownFeatures'] = Feature.objects.exclude(id__in = knownFeatureIDs)
+		links = context['robot'].videoLink.split('\n')
+		if len(links) > 1:
+			context['robot'].videoLinks = context['robot'].videoLink.split('\n')
 		return context
 
 class RobotUpdateView(LoginRequiredMixin, UpdateView):
@@ -53,6 +57,7 @@ class RobotUpdateView(LoginRequiredMixin, UpdateView):
 
 	def get_form(self, **kwargs):
 		form = super(RobotUpdateView, self).get_form(**kwargs)
+		form.fields['videoLink'].widget = widgets.Textarea()
 		form.fields['notes'].widget = widgets.Textarea()
 		return form
 

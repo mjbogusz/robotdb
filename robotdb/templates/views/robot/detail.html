@@ -31,7 +31,17 @@
 		</tr>
 		<tr>
 			<th>Link to a video</th>
-			<td>{% if robot.videoLink %}<a href="{{ robot.videoLink }}">{{ robot.videoLink }}</a>{% endif %}</td>
+			<td>
+				{% if robot.videoLinks %}
+					<ul>
+					{% for link in robot.videoLinks %}
+						<li><a href="{{ link }}">{{ link }}</a></li>
+					{% endfor %}
+					</ul>
+				{% elif robot.videoLink %}
+					<a href="{{ robot.videoLink }}">{{ robot.videoLink }}</a>
+				{% endif %}
+			</td>
 		</tr>
 		<tr>
 			<th>Notes</th>
