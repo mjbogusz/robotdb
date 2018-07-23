@@ -60,25 +60,12 @@ class RobotTable(tables.Table):
 		return format_html(html)
 
 	def render_features(self, record, value):
-		html = ''
-		robotFeatures = record.robotfeature_set.all().order_by('-available', 'feature')
-		for rf in robotFeatures:
-			if rf.available:
-				html += '<p><span class="feature_true">✔</span> '
-			else:
-				html += '<p><span class="feature_false">✘</span> '
-			href = reverse('featureDetail', kwargs = {'featureID': rf.feature_id})
-			html += format_html('<a href="{}">{}</a>', href, rf.feature)
-			html += '</p>'
-
-		knownFeatureIDs = robotFeatures.values_list('feature_id', flat = True)
-		unknownFeatures = Feature.objects.exclude(id__in = knownFeatureIDs)
-		for f in unknownFeatures:
-			html += '<p><span class="feature_unknown">?</span> '
-			href = reverse('featureDetail', kwargs = {'featureID': f.id})
-			html += format_html('<a href="{}">{}</a>', href, f)
-			html += '</p>'
-
+		robotFeatures = record.robotfeature_set.filter(available = True).order_by('feature')
+		html = '<ul class="featureList">'
+		for i in robotFeatures:
+			href = reverse('featureDetail', kwargs = {'featureID': i.id})
+			html += format_html('<li><a href="{}">{}</a></li>', href, i)
+		html += '</ul>'
 		return format_html(html)
 
 	def render_projects(self, value):
@@ -103,5 +90,6 @@ class RobotTable(tables.Table):
 	class Meta:
 		model = Robot
 		attrs = {
-			'class': 'robotTable entryTable pure-table'
+			'class': 'entryTable pure-table'
 		}
+		empty_text = 'No robots in database.'

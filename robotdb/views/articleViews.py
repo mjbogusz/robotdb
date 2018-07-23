@@ -1,7 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.forms import widgets
+from django.urls import reverse
+
 from django_tables2 import RequestConfig
+from django_tables2.views import SingleTableMixin
+from django_filters.views import FilterView
 
 from robotdb.models import Article
 from robotdb.tables import ArticleTable
@@ -48,15 +52,22 @@ class ArticleUpdateView(LoginRequiredMixin, UpdateView):
 		form.fields['notes'].widget = widgets.Textarea()
 		return form
 
-class ArticleListView(LoginRequiredMixin, ListView):
+# class ArticleListView(LoginRequiredMixin, SingleTableMixin, FilterView):
+class ArticleListView(LoginRequiredMixin, SingleTableMixin, ListView):
 	model = Article
-	template_name = 'views/article/list.html'
+	template_name = 'views/list.html'
+
+	table_class = ArticleTable
+	paginate_by = False
+	# filterset_class = ArticleFilter
 
 	def get_context_data(self, **kwargs):
 		context = super(ArticleListView, self).get_context_data(**kwargs)
-		articleQuerySet = Article.objects.all()
-		articleTable = ArticleTable(articleQuerySet, exclude = ('bibtex',))
-		RequestConfig(self.request).configure(articleTable)
-		context['articleTable'] = articleTable
-		context['articleCount'] = len(articleQuerySet)
+
+		context['title'] = 'Articles'
+		context['addButton'] = {
+			'url': reverse('articleCreate'),
+			'title': 'Add an article',
+		}
+
 		return context

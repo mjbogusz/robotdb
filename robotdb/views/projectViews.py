@@ -1,7 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.forms import widgets
+from django.urls import reverse
+
 from django_tables2 import RequestConfig
+from django_tables2.views import SingleTableMixin
+from django_filters.views import FilterView
 
 from robotdb.models import Project
 from robotdb.tables import ProjectTable
@@ -44,15 +48,22 @@ class ProjectUpdateView(LoginRequiredMixin, UpdateView):
 		form.fields['notes'].widget = widgets.Textarea()
 		return form
 
-class ProjectListView(LoginRequiredMixin, ListView):
+# class ProjectListView(LoginRequiredMixin, SingleTableMixin, FilterView):
+class ProjectListView(LoginRequiredMixin, SingleTableMixin, ListView):
 	model = Project
-	template_name = 'views/project/list.html'
+	template_name = 'views/list.html'
+
+	table_class = ProjectTable
+	paginate_by = False
+	# filterset_class = ProjectFilter
 
 	def get_context_data(self, **kwargs):
 		context = super(ProjectListView, self).get_context_data(**kwargs)
-		projectQuerySet = Project.objects.all()
-		projectTable = ProjectTable(projectQuerySet)
-		RequestConfig(self.request).configure(projectTable)
-		context['projectTable'] = projectTable
-		context['projectCount'] = len(projectQuerySet)
+
+		context['title'] = 'Projects'
+		context['addButton'] = {
+			'url': reverse('projectCreate'),
+			'title': 'Add a project',
+		}
+
 		return context

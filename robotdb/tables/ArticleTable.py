@@ -22,5 +22,6 @@ class ArticleTable(tables.Table):
 	class Meta:
 		model = Article
 		attrs = {
-			'class': 'articleTable entryTable pure-table'
+			'class': 'entryTable pure-table'
 		}
+		empty_text = 'No articles in database.'

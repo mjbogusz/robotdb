@@ -17,5 +17,6 @@ class ApplicationTable(tables.Table):
 	class Meta:
 		model = Application
 		attrs = {
-			'class': 'applicationTable entryTable pure-table'
+			'class': 'entryTable pure-table'
 		}
+		empty_text = 'No applications in database.'

@@ -1,10 +1,15 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.forms import widgets
+from django.urls import reverse
+
 from django_tables2 import RequestConfig
+from django_tables2.views import SingleTableMixin
+from django_filters.views import FilterView
 
 from robotdb.models import Robot, Feature
 from robotdb.tables import RobotTable
+from robotdb.filters import RobotFilter
 
 class RobotCreateView(LoginRequiredMixin, CreateView):
 	model = Robot
@@ -61,15 +66,25 @@ class RobotUpdateView(LoginRequiredMixin, UpdateView):
 		form.fields['notes'].widget = widgets.Textarea()
 		return form
 
-class RobotListView(LoginRequiredMixin, ListView):
+class RobotListView(LoginRequiredMixin, SingleTableMixin, FilterView):
 	model = Robot
-	template_name = 'views/robot/list.html'
+	template_name = 'views/list.html'
+
+	table_class = RobotTable
+	paginate_by = False
+	filterset_class = RobotFilter
+
+	def get_filterset_kwargs(self, filterset_class):
+		kwargs = super(RobotListView, self).get_filterset_kwargs(filterset_class)
+		if kwargs['data'] is None:
+			kwargs['data'] = {}
+		return kwargs
 
 	def get_context_data(self, **kwargs):
 		context = super(RobotListView, self).get_context_data(**kwargs)
-		robotQuerySet = Robot.objects.all()
-		robotTable = RobotTable(robotQuerySet)
-		RequestConfig(self.request).configure(robotTable)
-		context['robotTable'] = robotTable
-		context['robotCount'] = len(robotQuerySet)
+		context['title'] = 'Robots'
+		context['addButton'] = {
+			'url': reverse('robotCreate'),
+			'title': 'Add a robot',
+		}
 		return context

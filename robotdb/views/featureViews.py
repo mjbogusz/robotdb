@@ -1,7 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.forms import widgets
+from django.urls import reverse
+
 from django_tables2 import RequestConfig
+from django_tables2.views import SingleTableMixin
+from django_filters.views import FilterView
 
 from robotdb.models import Feature
 from robotdb.tables import FeatureTable
@@ -42,15 +46,22 @@ class FeatureUpdateView(LoginRequiredMixin, UpdateView):
 		form.fields['notes'].widget = widgets.Textarea()
 		return form
 
-class FeatureListView(LoginRequiredMixin, ListView):
+# class FeatureListView(LoginRequiredMixin, SingleTableMixin, FilterView):
+class FeatureListView(LoginRequiredMixin, SingleTableMixin, ListView):
 	model = Feature
-	template_name = 'views/feature/list.html'
+	template_name = 'views/list.html'
+
+	table_class = FeatureTable
+	paginate_by = False
+	# filterset_class = FeatureFilter
 
 	def get_context_data(self, **kwargs):
 		context = super(FeatureListView, self).get_context_data(**kwargs)
-		featureQuerySet = Feature.objects.all()
-		featureTable = FeatureTable(featureQuerySet)
-		RequestConfig(self.request).configure(featureTable)
-		context['featureTable'] = featureTable
-		context['featureCount'] = len(featureQuerySet)
+
+		context['title'] = 'Features'
+		context['addButton'] = {
+			'url': reverse('featureCreate'),
+			'title': 'Add a feature',
+		}
+
 		return context

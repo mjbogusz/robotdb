@@ -11,6 +11,7 @@ libsass = "*"
 django-compressor = "*"
 "django-tables2" = "*"
 django-imagekit = "*"
+django-filter = "*"
 
 [dev-packages]
 

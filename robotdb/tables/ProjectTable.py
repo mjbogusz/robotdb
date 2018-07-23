@@ -21,5 +21,6 @@ class ProjectTable(tables.Table):
 	class Meta:
 		model = Project
 		attrs = {
-			'class': 'projectTable entryTable pure-table'
+			'class': 'entryTable pure-table'
 		}
+		empty_text = 'No projects in database.'

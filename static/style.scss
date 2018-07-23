@@ -199,6 +199,33 @@ a {
 	}
 }
 
+.filterForm {
+	th, td {
+		padding: 0.2rem 0.5rem !important;
+	}
+	.formFilterTable, .formFilterButton {
+		display: inline-block;
+		vertical-align: center;
+	}
+	table {
+		input, select, textarea {
+			color: $background-color-dark;
+			@include box-sizing(border-box);
+			width: 100%;
+		}
+	}
+	.formFilterButton {
+		font-size: 1rem;
+		text-align: left;
+		margin-left: 0.5rem;
+		margin-top: -0.5rem;
+		input {
+			padding: 0.5rem 1rem;
+			background-color: $color-green-dark;
+		}
+	}
+}
+
 .formSubmitButton {
 	font-size: 1rem;
 	margin: 1rem;

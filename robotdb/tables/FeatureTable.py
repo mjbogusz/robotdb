@@ -17,5 +17,6 @@ class FeatureTable(tables.Table):
 	class Meta:
 		model = Feature
 		attrs = {
-			'class': 'featureTable entryTable pure-table'
+			'class': 'entryTable pure-table'
 		}
+		empty_text = 'No features in database.'
