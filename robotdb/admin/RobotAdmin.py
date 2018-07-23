@@ -7,6 +7,7 @@ from .RobotImageAdmin import RobotImageInline
 
 class RobotAdminForm(forms.ModelForm):
 	notes = forms.CharField(widget = forms.Textarea, required = False)
+	videoLink = forms.CharField(widget = forms.Textarea, required = False)
 
 	class Meta:
 		model = Robot
@@ -21,6 +22,7 @@ class RobotAdmin(admin.ModelAdmin):
 			'name',
 			'producer',
 			'country',
+			'year',
 			'price',
 			'notes',
 		]}),

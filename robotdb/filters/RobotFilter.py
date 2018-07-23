@@ -9,5 +9,6 @@ class RobotFilter(FilterSet):
 			'name': ['contains'],
 			'producer': ['contains'],
 			'country': ['contains'],
+			'year': ['lt', 'gt'],
 			'price': ['lt', 'gt'],
 		}
