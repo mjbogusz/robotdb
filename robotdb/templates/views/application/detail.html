@@ -38,4 +38,26 @@
 			<td>{{ application.notes }}</a></td>
 		</tr>
 	</table>
+
+	<h3>Robots with this application:</h3>
+	<table class="pure-table featureList">
+		<thead><tr>
+			<th>Name</th>
+			<th>Producer</th>
+			<th>Coutry</th>
+			<th>Year</th>
+			<th>Price</th>
+		</tr></thead>
+		<tbody>
+			{% for robot in application.robot_set.all %}
+			<tr>
+				<td><a href="{% url 'robotDetail' robot.pk %}">{{ robot.name }}</a></td>
+				<td>{{ robot.producer }}</td>
+				<td>{{ robot.coutry }}</td>
+				<td>{{ robot.year }}</td>
+				<td>{{ robot.price }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 {% endblock %}

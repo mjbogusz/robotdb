@@ -64,7 +64,7 @@ class RobotTable(tables.Table):
 		html = '<ul class="featureList">'
 		for i in robotFeatures:
 			href = reverse('featureDetail', kwargs = {'featureID': i.id})
-			html += format_html('<li><a href="{}">{}</a></li>', href, i)
+			html += format_html('<li><a href="{}">{}</a></li>', href, i.feature)
 		html += '</ul>'
 		return format_html(html)
 

@@ -26,4 +26,26 @@
 			<td>{{ feature.notes }}</a></td>
 		</tr>
 	</table>
+
+	<h3>Robots with this feature:</h3>
+	<table class="pure-table featureList">
+		<thead><tr>
+			<th>Name</th>
+			<th>Producer</th>
+			<th>Coutry</th>
+			<th>Year</th>
+			<th>Price</th>
+		</tr></thead>
+		<tbody>
+			{% for rf in feature.robotfeature_set.all %}
+			<tr>
+				<td><a href="{% url 'robotDetail' rf.robot.pk %}">{{ rf.robot.name }}</a></td>
+				<td>{{ rf.robot.producer }}</td>
+				<td>{{ rf.robot.coutry }}</td>
+				<td>{{ rf.robot.year }}</td>
+				<td>{{ rf.robot.price }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 {% endblock %}

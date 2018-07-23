@@ -140,7 +140,7 @@
 		<tbody>
 			{% for app in robot.applications.all %}
 			<tr>
-				<td><a href="{% url 'articleDetail' app.pk %}">{{ app.name }}</a></td>
+				<td><a href="{% url 'applicationDetail' app.pk %}">{{ app.name }}</a></td>
 				<td>{{ app.get_mobility_display }}</td>
 				<td>{{ app.get_selfreliantCare_display }}</td>
 				<td>{{ app.get_interpersonalInteraction_display }}</td>

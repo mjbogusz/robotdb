@@ -3,7 +3,6 @@ from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.forms import widgets
 from django.urls import reverse
 
-from django_tables2 import RequestConfig
 from django_tables2.views import SingleTableMixin
 from django_filters.views import FilterView
 
