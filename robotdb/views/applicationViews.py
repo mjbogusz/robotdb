@@ -59,6 +59,7 @@ class ApplicationListView(LoginRequiredMixin, SingleTableMixin, ListView):
 
 	table_class = ApplicationTable
 	paginate_by = False
+	table_pagination = False
 	# filterset_class = ApplicationFilter
 
 	def get_context_data(self, **kwargs):
@@ -71,3 +72,6 @@ class ApplicationListView(LoginRequiredMixin, SingleTableMixin, ListView):
 		}
 
 		return context
+
+	def get_table_pagination(self, table):
+		return False

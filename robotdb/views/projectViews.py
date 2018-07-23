@@ -55,6 +55,7 @@ class ProjectListView(LoginRequiredMixin, SingleTableMixin, ListView):
 
 	table_class = ProjectTable
 	paginate_by = False
+	table_pagination = False
 	# filterset_class = ProjectFilter
 
 	def get_context_data(self, **kwargs):
@@ -67,3 +68,6 @@ class ProjectListView(LoginRequiredMixin, SingleTableMixin, ListView):
 		}
 
 		return context
+
+	def get_table_pagination(self, table):
+		return False

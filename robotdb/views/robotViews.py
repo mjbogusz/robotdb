@@ -72,6 +72,7 @@ class RobotListView(LoginRequiredMixin, SingleTableMixin, FilterView):
 
 	table_class = RobotTable
 	paginate_by = False
+	table_pagination = False
 	filterset_class = RobotFilter
 
 	def get_filterset_kwargs(self, filterset_class):
@@ -88,3 +89,6 @@ class RobotListView(LoginRequiredMixin, SingleTableMixin, FilterView):
 			'title': 'Add a robot',
 		}
 		return context
+
+	def get_table_pagination(self, table):
+		return False

@@ -59,6 +59,7 @@ class ArticleListView(LoginRequiredMixin, SingleTableMixin, ListView):
 
 	table_class = ArticleTable
 	paginate_by = False
+	table_pagination = False
 	# filterset_class = ArticleFilter
 
 	def get_context_data(self, **kwargs):
@@ -71,3 +72,6 @@ class ArticleListView(LoginRequiredMixin, SingleTableMixin, ListView):
 		}
 
 		return context
+
+	def get_table_pagination(self, table):
+		return False

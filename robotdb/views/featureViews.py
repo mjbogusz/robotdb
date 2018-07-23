@@ -53,6 +53,7 @@ class FeatureListView(LoginRequiredMixin, SingleTableMixin, ListView):
 
 	table_class = FeatureTable
 	paginate_by = False
+	table_pagination = False
 	# filterset_class = FeatureFilter
 
 	def get_context_data(self, **kwargs):
@@ -65,3 +66,6 @@ class FeatureListView(LoginRequiredMixin, SingleTableMixin, ListView):
 		}
 
 		return context
+
+	def get_table_pagination(self, table):
+		return False
