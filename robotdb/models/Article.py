@@ -12,4 +12,7 @@ class Article(models.Model):
 		return reverse('articleDetail', kwargs = {'articleID': self.pk})
 
 	def __str__(self):
-		return self.name + ' (' + str(self.year) + ')'
+		name = self.name
+		if (len(name) > 33):
+			name = name[:30] + '...'
+		return name + ' (' + str(self.year) + ')'
