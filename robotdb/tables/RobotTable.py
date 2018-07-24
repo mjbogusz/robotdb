@@ -2,7 +2,7 @@ from django.utils.html import format_html
 from django.urls import reverse
 import django_tables2 as tables
 
-from robotdb.models import Feature, Robot
+from robotdb.models import Robot
 
 class RobotTable(tables.Table):
 	link = tables.Column(orderable = False)

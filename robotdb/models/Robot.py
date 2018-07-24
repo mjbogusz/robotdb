@@ -4,13 +4,15 @@ from django.urls import reverse
 from .Application import Application
 from .Article import Article
 from .Feature import Feature
+from .MobileBase import MobileBase
 from .Project import Project
 
 class Robot(models.Model):
 	name = models.CharField(max_length = 200, unique = True)
 	producer = models.CharField(max_length = 200)
 	country = models.CharField('Country of origin (3 character ISO)', max_length = 3, blank = True)
-	year = models.PositiveSmallIntegerField(default = 2018)
+	year = models.PositiveSmallIntegerField(default = 1970)
+	mobileBase = models.ForeignKey(MobileBase, on_delete = models.SET_NULL, verbose_name='Mobile base type', null = True)
 	link = models.CharField('Link to main site', max_length = 400, blank = True)
 	videoLink = models.CharField('Links to videos (newline-separated)', max_length = 400, blank = True)
 	price = models.PositiveIntegerField('Price in EUR', default = 0, blank = True)

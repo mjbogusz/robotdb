@@ -1,6 +1,7 @@
 from .Application import Application
 from .Article import Article
 from .Feature import Feature
+from .MobileBase import MobileBase
 from .Project import Project
 from .Robot import Robot
 from .RobotFeature import RobotFeature
@@ -11,6 +12,7 @@ __all__ = [
 	'Application',
 	'Article',
 	'Feature',
+	'MobileBase',
 	'Project',
 	'Robot',
 	'RobotFeature',

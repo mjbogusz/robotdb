@@ -15,10 +15,10 @@
 	<body>
 		<nav id="navbar">
 			<div id="navbar-container" class="pure-g">
-				<div id="navbar-header" class="pure-u-1 pure-u-md-1-2">
+				<div id="navbar-header" class="pure-u-1 pure-u-md-1-3">
 					<a id="navbar-title" class="pure-menu-link" href="/">RobotDB</a>
 				</div>
-				<div id="navbar-links" class="pure-u-1 pure-u-md-1-2 pure-menu pure-menu-horizontal">
+				<div id="navbar-links" class="pure-u-1 pure-u-md-2-3 pure-menu pure-menu-horizontal">
 					<ul class="pure-menu-list">
 						<li class="pure-menu-item">
 							<a class="pure-menu-link" href="/robots">Robots</a>
@@ -36,6 +36,9 @@
 							<a class="pure-menu-link" href="/applications">Applications</a>
 						</li>
 						{% if user.is_authenticated %}
+							<li class="pure-menu-item">
+								<a class="pure-menu-link" href="/admin">Admin</a>
+							</li>
 							<li class="pure-menu-item">
 								<ul class="pure-menu-list pure-submenu">
 									<li class="pure-menu-item">
