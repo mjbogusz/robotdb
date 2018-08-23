@@ -131,7 +131,7 @@
 		</tbody>
 	</table>
 
-	<h3>Applications:</h3>
+	<h3>Skills:</h3>
 	<table class="pure-table featureList">
 		<thead><tr>
 			<th>Name</th>
@@ -142,14 +142,14 @@
 			<th>Notes</th>
 		</tr></thead>
 		<tbody>
-			{% for app in robot.applications.all %}
+			{% for skill in robot.skills.all %}
 			<tr>
-				<td><a href="{% url 'applicationDetail' app.pk %}">{{ app.name }}</a></td>
-				<td>{{ app.get_mobility_display }}</td>
-				<td>{{ app.get_selfreliantCare_display }}</td>
-				<td>{{ app.get_interpersonalInteraction_display }}</td>
-				<td>{{ app.get_other_display }}</td>
-				<td>{{ app.notes }}</td>
+				<td><a href="{% url 'skillDetail' skill.pk %}">{{ skill.name }}</a></td>
+				<td>{{ skill.get_mobility_display }}</td>
+				<td>{{ skill.get_selfreliantCare_display }}</td>
+				<td>{{ skill.get_interpersonalInteraction_display }}</td>
+				<td>{{ skill.get_other_display }}</td>
+				<td>{{ skill.notes }}</td>
 			</tr>
 			{% endfor %}
 		</tbody>

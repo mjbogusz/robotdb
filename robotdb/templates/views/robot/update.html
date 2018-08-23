@@ -7,7 +7,7 @@
 {% block topMenu %}
 <a href="{% url 'robotDetail' robot.id %}" class="button">Back to details</a>
 <a href="{% url 'robotList' %}" class="button">Back to List</a>
-<a href="{% url 'admin:robotdb_robot_change' robot.id %}" class="button">Advanced edit (Features, Applications, Photos etc)</a>
+<a href="{% url 'admin:robotdb_robot_change' robot.id %}" class="button">Advanced edit (Features, Skills, Photos etc)</a>
 {% endblock %}
 
 {% block content %}

@@ -12,7 +12,7 @@ class RobotTable(tables.Table):
 		'th': {'class': 'featureList'},
 		'td': {'class': 'featureList'}
 	})
-	applications = tables.Column(orderable = False)
+	skills = tables.Column(orderable = False)
 	articles = tables.Column(orderable = False)
 	projects = tables.Column(orderable = False)
 	robotimage_set = tables.Column(verbose_name = 'Pictures', orderable = False, attrs = {
@@ -41,11 +41,11 @@ class RobotTable(tables.Table):
 			html = format_html('<a href="{}">VIDEO</a>', value)
 		return format_html(html)
 
-	def render_applications(self, value):
-		applications = value.all()
-		html = '<ul class="applicationList">'
-		for i in applications:
-			href = reverse('applicationDetail', kwargs = {'applicationID': i.id})
+	def render_skills(self, value):
+		skills = value.all()
+		html = '<ul class="skillList">'
+		for i in skills:
+			href = reverse('skillDetail', kwargs = {'skillID': i.id})
 			html += format_html('<li><a href="{}">{}</a></li>', href, i)
 		html += '</ul>'
 		return format_html(html)

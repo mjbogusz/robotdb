@@ -16,7 +16,7 @@ class RobotAdminForm(forms.ModelForm):
 class RobotAdmin(admin.ModelAdmin):
 	form = RobotAdminForm
 	inlines = (RobotFeatureInline, RobotImageInline, )
-	filter_horizontal = ('applications', 'articles', 'projects',)
+	filter_horizontal = ('skills', 'articles', 'projects',)
 	fieldsets = [
 		(None, {'fields': [
 			'name',
@@ -30,8 +30,8 @@ class RobotAdmin(admin.ModelAdmin):
 			'link',
 			'videoLink',
 		]}),
-		('Applications', {'fields': [
-			'applications',
+		('Skills', {'fields': [
+			'skills',
 		]}),
 		('Articles', {'fields': [
 			'articles',
@@ -52,7 +52,7 @@ class RobotAdmin(admin.ModelAdmin):
 		'producer',
 		'country',
 		'price',
-		'applications',
+		'skills',
 		'features',
 	]
 	search_fields = [

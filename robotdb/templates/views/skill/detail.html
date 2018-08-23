@@ -1,45 +1,45 @@
 {% extends "base.html" %}
 
 {% block title %}
-	<h1>Application details</h1>
+	<h1>Skill details</h1>
 {% endblock %}
 
 {% block topMenu %}
-<a href="{% url 'applicationList' %}" class="button">Back to List</a>
-<a href="{% url 'applicationUpdate' application.id %}" class="button">Edit this application</a>
-<a href="{% url 'applicationCreate' %}" class="button">Add another</a>
+<a href="{% url 'skillList' %}" class="button">Back to List</a>
+<a href="{% url 'skillUpdate' skill.id %}" class="button">Edit this skill</a>
+<a href="{% url 'skillCreate' %}" class="button">Add another</a>
 {% endblock %}
 
 {% block content %}
-	<h3>Application properties:</h3>
+	<h3>Skill properties:</h3>
 	<table class="pure-table entryDetails">
 		<tr>
 			<th>Name</th>
-			<td>{{ application.name }}</td>
+			<td>{{ skill.name }}</td>
 		</tr>
 		<tr>
 			<th>Mobility enhancement</th>
-			<td>{{ application.get_mobility_display }}</a></td>
+			<td>{{ skill.get_mobility_display }}</a></td>
 		</tr>
 		<tr>
 			<th>Selfreliant care</th>
-			<td>{{ application.get_selfreliantCare_display }}</a></td>
+			<td>{{ skill.get_selfreliantCare_display }}</a></td>
 		</tr>
 		<tr>
 			<th>Interpersonal interaction</th>
-			<td>{{ application.get_interpersonalInteraction_display }}</a></td>
+			<td>{{ skill.get_interpersonalInteraction_display }}</a></td>
 		</tr>
 		<tr>
 			<th>Other</th>
-			<td>{{ application.get_other_display }}</a></td>
+			<td>{{ skill.get_other_display }}</a></td>
 		</tr>
 		<tr>
 			<th>Notes</th>
-			<td>{{ application.notes }}</a></td>
+			<td>{{ skill.notes }}</a></td>
 		</tr>
 	</table>
 
-	<h3>Robots with this application:</h3>
+	<h3>Robots with this skill:</h3>
 	<table class="pure-table featureList">
 		<thead><tr>
 			<th>Name</th>
@@ -49,7 +49,7 @@
 			<th>Price</th>
 		</tr></thead>
 		<tbody>
-			{% for robot in application.robot_set.all %}
+			{% for robot in skill.robot_set.all %}
 			<tr>
 				<td><a href="{% url 'robotDetail' robot.pk %}">{{ robot.name }}</a></td>
 				<td>{{ robot.producer }}</td>
