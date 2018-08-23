@@ -1,12 +1,12 @@
 from .ArticleTable import ArticleTable
-from .FeatureTable import FeatureTable
+from .EquipmentTable import EquipmentTable
 from .ProjectTable import ProjectTable
 from .RobotTable import RobotTable
 from .SkillTable import SkillTable
 
 __all__ = [
 	'ArticleTable',
-	'FeatureTable',
+	'EquipmentTable',
 	'ProjectTable',
 	'RobotTable',
 	'SkillTable',

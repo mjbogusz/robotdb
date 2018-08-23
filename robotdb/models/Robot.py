@@ -3,7 +3,7 @@ from django.urls import reverse
 
 from .Skill import Skill
 from .Article import Article
-from .Feature import Feature
+from .Equipment import Equipment
 from .MobileBase import MobileBase
 from .Project import Project
 
@@ -19,7 +19,7 @@ class Robot(models.Model):
 	notes = models.CharField('Additional notes', max_length = 2000, blank = True)
 	skills = models.ManyToManyField(Skill, blank = True)
 	articles = models.ManyToManyField(Article, blank = True)
-	features = models.ManyToManyField(Feature, through = 'RobotFeature', blank = True)
+	equipment = models.ManyToManyField(Equipment, through = 'RobotEquipment', blank = True)
 	projects = models.ManyToManyField(Project, blank = True)
 
 	def save(self, *args, **kwargs):

@@ -1,19 +1,17 @@
 {% extends "base.html" %}
 
 {% block title %}
-	<h1>Editing an feature</h1>
+	<h1>Adding an Equipment</h1>
 {% endblock %}
 
 {% block topMenu %}
-<a href="{% url 'featureDetail' feature.id %}" class="button">Back to details</a>
-<a href="{% url 'featureList' %}" class="button">Back to List</a>
+<a href="{% url 'equipmentList' %}" class="button">Back to List</a>
 {% endblock %}
 
 {% block content %}
-	<form class="entryEditForm" action="{% url 'featureUpdate' feature.id %}" method="post">
+	<form class="entryEditForm" action="{% url 'equipmentCreate' %}" method="post">
 		{% csrf_token %}
-		<h3>Feature properties:</h3>
-
+		<h3>Equipment properties:</h3>
 		<table class="pure-table entryDetails entryEditTable">
 			{{ form.as_table }}
 		</table>
