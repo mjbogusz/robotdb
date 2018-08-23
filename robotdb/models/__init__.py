@@ -1,20 +1,20 @@
 from .Article import Article
-from .Feature import Feature
+from .Equipment import Equipment
 from .MobileBase import MobileBase
 from .Project import Project
 from .Robot import Robot
-from .RobotFeature import RobotFeature
+from .RobotEquipment import RobotEquipment
 from .RobotImage import RobotImage
 from .Skill import Skill
 from .utils import getRobotImagePath
 
 __all__ = [
 	'Article',
-	'Feature',
+	'Equipment',
 	'MobileBase',
 	'Project',
 	'Robot',
-	'RobotFeature',
+	'RobotEquipment',
 	'RobotImage',
 	'Skill',
 	'getRobotImagePath',

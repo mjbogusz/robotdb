@@ -61,7 +61,7 @@
 		</tr>
 	</table>
 
-	<h3>Features:</h3>
+	<h3>Equipment:</h3>
 	<table class="pure-table featureList">
 		<thead><tr>
 			<th>Available</th>
@@ -70,7 +70,7 @@
 			<th>Notes</th>
 		</tr></thead>
 		<tbody>
-			{% for rf in robot.robotfeature_set.all %}
+			{% for rf in robot.robotequipment_set.all %}
 			<tr>
 				<td>
 					{% if rf.available %}
@@ -79,17 +79,17 @@
 						<span class="feature_false">✘</span>
 					{% endif %}
 				</td>
-				<td><a href="{% url 'featureDetail' rf.feature.pk %}">{{ rf.feature.name }}</a></td>
-				<td>{{ rf.feature.parameters }}</td>
-				<td>{{ rf.feature.notes }}</td>
+				<td><a href="{% url 'equipmentDetail' rf.equipment.pk %}">{{ rf.equipment.name }}</a></td>
+				<td>{{ rf.equipment.parameters }}</td>
+				<td>{{ rf.equipment.notes }}</td>
 			</tr>
 			{% endfor %}
-			{% for feature in unknownFeatures %}
+			{% for equipment in unknownEquipments %}
 			<tr>
 				<td><span class="feature_unknown">?</span></td>
-				<td><a href="{% url 'featureDetail' feature.pk %}">{{ feature.name }}</a></td>
-				<td>{{ feature.parameters }}</td>
-				<td>{{ feature.notes }}</td>
+				<td><a href="{% url 'equipmentDetail' equipment.pk %}">{{ equipment.name }}</a></td>
+				<td>{{ equipment.parameters }}</td>
+				<td>{{ equipment.notes }}</td>
 			</tr>
 			{% endfor %}
 		</tbody>

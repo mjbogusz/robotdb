@@ -1,34 +1,34 @@
 {% extends "base.html" %}
 
 {% block title %}
-	<h1>Feature details</h1>
+	<h1>Equipment details</h1>
 {% endblock %}
 
 {% block topMenu %}
-<a href="{% url 'featureList' %}" class="button">Back to List</a>
-<a href="{% url 'featureUpdate' feature.id %}" class="button">Edit this feature</a>
-<a href="{% url 'featureCreate' %}" class="button">Add another</a>
+<a href="{% url 'equipmentList' %}" class="button">Back to List</a>
+<a href="{% url 'equipmentUpdate' equipment.id %}" class="button">Edit this equipment</a>
+<a href="{% url 'equipmentCreate' %}" class="button">Add another</a>
 {% endblock %}
 
 {% block content %}
-	<h3>Feature properties:</h3>
+	<h3>Equipment properties:</h3>
 	<table class="pure-table entryDetails">
 		<tr>
 			<th>Name</th>
-			<td>{{ feature.name }}</td>
+			<td>{{ equipment.name }}</td>
 		</tr>
 		<tr>
 			<th>Parameters</th>
-			<td>{{ feature.parameters }}</a></td>
+			<td>{{ equipment.parameters }}</a></td>
 		</tr>
 		<tr>
 			<th>Notes</th>
-			<td>{{ feature.notes }}</a></td>
+			<td>{{ equipment.notes }}</a></td>
 		</tr>
 	</table>
 
-	<h3>Robots with this feature:</h3>
-	<table class="pure-table featureList">
+	<h3>Robots with this equipment:</h3>
+	<table class="pure-table equipmentList">
 		<thead><tr>
 			<th>Name</th>
 			<th>Producer</th>
@@ -37,7 +37,7 @@
 			<th>Price</th>
 		</tr></thead>
 		<tbody>
-			{% for rf in feature.robotfeature_set.all %}
+			{% for rf in equipment.robotequipment_set.all %}
 			<tr>
 				<td><a href="{% url 'robotDetail' rf.robot.pk %}">{{ rf.robot.name }}</a></td>
 				<td>{{ rf.robot.producer }}</td>
