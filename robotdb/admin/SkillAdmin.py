@@ -1,17 +1,17 @@
 from django import forms
 from django.contrib import admin
 
-from robotdb.models import Application
+from robotdb.models import Skill
 
-class ApplicationAdminForm(forms.ModelForm):
+class SkillAdminForm(forms.ModelForm):
 	notes = forms.CharField(widget = forms.Textarea, required = False)
 
 	class Meta:
-		model = Application
+		model = Skill
 		exclude = ()
 
-class ApplicationAdmin(admin.ModelAdmin):
-	form = ApplicationAdminForm
+class SkillAdmin(admin.ModelAdmin):
+	form = SkillAdminForm
 	fieldsets = [
 		(None, {'fields': [
 			'name',

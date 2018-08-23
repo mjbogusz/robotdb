@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-from .Application import Application
+from .Skill import Skill
 from .Article import Article
 from .Feature import Feature
 from .MobileBase import MobileBase
@@ -17,7 +17,7 @@ class Robot(models.Model):
 	videoLink = models.CharField('Links to videos (newline-separated)', max_length = 400, blank = True)
 	price = models.PositiveIntegerField('Price in EUR', default = 0, blank = True)
 	notes = models.CharField('Additional notes', max_length = 2000, blank = True)
-	applications = models.ManyToManyField(Application, blank = True)
+	skills = models.ManyToManyField(Skill, blank = True)
 	articles = models.ManyToManyField(Article, blank = True)
 	features = models.ManyToManyField(Feature, through = 'RobotFeature', blank = True)
 	projects = models.ManyToManyField(Project, blank = True)

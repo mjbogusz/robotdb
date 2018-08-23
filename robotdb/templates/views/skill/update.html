@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 
 {% block title %}
-	<h1>Adding an Application</h1>
+	<h1>Editing an skill</h1>
 {% endblock %}
 
 {% block topMenu %}
-<a href="{% url 'applicationList' %}" class="button">Back to List</a>
+<a href="{% url 'skillDetail' skill.id %}" class="button">Back to details</a>
+<a href="{% url 'skillList' %}" class="button">Back to List</a>
 {% endblock %}
 
 {% block content %}
-	<form class="entryEditForm" action="{% url 'applicationCreate' %}" method="post">
+	<form class="entryEditForm" action="{% url 'skillUpdate' skill.id %}" method="post">
 		{% csrf_token %}
-		<h3>Application properties:</h3>
+		<h3>Skill properties:</h3>
+
 		<table class="pure-table entryDetails entryEditTable">
 			{{ form.as_table }}
 		</table>

@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-class Application(models.Model):
+class Skill(models.Model):
 	ENHANCEMENT_VALUE_CHOICES = (
 		(0, 'Not present'),
 		(1, 'Physical'),
@@ -16,7 +16,7 @@ class Application(models.Model):
 	notes = models.CharField('Additional notes', max_length = 2000, blank = True)
 
 	def get_absolute_url(self):
-		return reverse('applicationDetail', kwargs = {'applicationID': self.pk})
+		return reverse('skillDetail', kwargs = {'skillID': self.pk})
 
 	def __str__(self):
 		return self.name
