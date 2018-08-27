@@ -2,7 +2,6 @@ from django.contrib import admin
 from django import forms
 
 from robotdb.models import Robot
-from .RobotEquipmentAdmin import RobotEquipmentInline
 from .RobotImageAdmin import RobotImageInline
 
 class RobotAdminForm(forms.ModelForm):
@@ -15,8 +14,8 @@ class RobotAdminForm(forms.ModelForm):
 
 class RobotAdmin(admin.ModelAdmin):
 	form = RobotAdminForm
-	inlines = (RobotEquipmentInline, RobotImageInline, )
-	filter_horizontal = ('skills', 'articles', 'projects',)
+	inlines = (RobotImageInline, )
+	filter_horizontal = ('skills', 'equipment', 'articles', 'projects',)
 	fieldsets = [
 		(None, {'fields': [
 			'name',
@@ -32,6 +31,9 @@ class RobotAdmin(admin.ModelAdmin):
 		]}),
 		('Skills', {'fields': [
 			'skills',
+		]}),
+		('Equipment', {'fields': [
+			'equipment',
 		]}),
 		('Articles', {'fields': [
 			'articles',

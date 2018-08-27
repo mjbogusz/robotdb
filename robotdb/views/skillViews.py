@@ -67,7 +67,7 @@ class SkillListView(LoginRequiredMixin, SingleTableMixin, ListView):
 		context['title'] = 'Skills'
 		context['addButton'] = {
 			'url': reverse('skillCreate'),
-			'title': 'Add an skill',
+			'title': 'Add a skill',
 		}
 
 		return context

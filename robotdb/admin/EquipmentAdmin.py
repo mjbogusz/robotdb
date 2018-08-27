@@ -2,7 +2,6 @@ from django import forms
 from django.contrib import admin
 
 from robotdb.models import Equipment
-from .RobotEquipmentAdmin import RobotEquipmentInline
 
 class EquipmentAdminForm(forms.ModelForm):
 	notes = forms.CharField(widget = forms.Textarea, required = False)
@@ -13,7 +12,6 @@ class EquipmentAdminForm(forms.ModelForm):
 
 class EquipmentAdmin(admin.ModelAdmin):
 	form = EquipmentAdminForm
-	inlines = (RobotEquipmentInline, )
 	fieldsets = [
 		(None, {'fields': [
 			'name',

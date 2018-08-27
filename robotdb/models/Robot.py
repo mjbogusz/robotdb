@@ -19,7 +19,7 @@ class Robot(models.Model):
 	notes = models.CharField('Additional notes', max_length = 2000, blank = True)
 	skills = models.ManyToManyField(Skill, blank = True)
 	articles = models.ManyToManyField(Article, blank = True)
-	equipment = models.ManyToManyField(Equipment, through = 'RobotEquipment', blank = True)
+	equipment = models.ManyToManyField(Equipment, blank = True)
 	projects = models.ManyToManyField(Project, blank = True)
 
 	def save(self, *args, **kwargs):

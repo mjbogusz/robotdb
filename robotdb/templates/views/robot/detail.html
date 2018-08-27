@@ -61,40 +61,6 @@
 		</tr>
 	</table>
 
-	<h3>Equipment:</h3>
-	<table class="pure-table featureList">
-		<thead><tr>
-			<th>Available</th>
-			<th>Name</th>
-			<th>Parameters</th>
-			<th>Notes</th>
-		</tr></thead>
-		<tbody>
-			{% for rf in robot.robotequipment_set.all %}
-			<tr>
-				<td>
-					{% if rf.available %}
-						<span class="feature_true">✔</span>
-					{% else %}
-						<span class="feature_false">✘</span>
-					{% endif %}
-				</td>
-				<td><a href="{% url 'equipmentDetail' rf.equipment.pk %}">{{ rf.equipment.name }}</a></td>
-				<td>{{ rf.equipment.parameters }}</td>
-				<td>{{ rf.equipment.notes }}</td>
-			</tr>
-			{% endfor %}
-			{% for equipment in unknownEquipments %}
-			<tr>
-				<td><span class="feature_unknown">?</span></td>
-				<td><a href="{% url 'equipmentDetail' equipment.pk %}">{{ equipment.name }}</a></td>
-				<td>{{ equipment.parameters }}</td>
-				<td>{{ equipment.notes }}</td>
-			</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-
 	<h3>Articles:</h3>
 	<table class="pure-table featureList">
 		<thead><tr>
@@ -150,6 +116,24 @@
 				<td>{{ skill.get_interpersonalInteraction_display }}</td>
 				<td>{{ skill.get_other_display }}</td>
 				<td>{{ skill.notes }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<h3>Equipment:</h3>
+	<table class="pure-table featureList">
+		<thead><tr>
+			<th>Name</th>
+			<th>Parameters</th>
+			<th>Notes</th>
+		</tr></thead>
+		<tbody>
+			{% for eq in robot.equipment.all %}
+			<tr>
+				<td><a href="{% url 'equipmentDetail' eq.pk %}">{{ eq.name }}</a></td>
+				<td>{{ eq.parameters }}</td>
+				<td>{{ eq.notes }}</td>
 			</tr>
 			{% endfor %}
 		</tbody>

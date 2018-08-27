@@ -8,10 +8,7 @@ class RobotTable(tables.Table):
 	link = tables.Column(orderable = False)
 	videoLink = tables.Column(orderable = False)
 	notes = tables.Column(orderable = False)
-	equipment = tables.Column(orderable = False, attrs = {
-		'th': {'class': 'equipmentList'},
-		'td': {'class': 'equipmentList'}
-	})
+	equipment = tables.Column(orderable = False)
 	skills = tables.Column(orderable = False)
 	articles = tables.Column(orderable = False)
 	projects = tables.Column(orderable = False)
@@ -59,12 +56,12 @@ class RobotTable(tables.Table):
 		html += '</ul>'
 		return format_html(html)
 
-	def render_equipment(self, record, value):
-		robotEquipments = record.robotequipment_set.filter(available = True).order_by('equipment')
+	def render_equipment(self, value):
+		equipment = value.all()
 		html = '<ul class="equipmentList">'
-		for i in robotEquipments:
+		for i in equipment:
 			href = reverse('equipmentDetail', kwargs = {'equipmentID': i.id})
-			html += format_html('<li><a href="{}">{}</a></li>', href, i.equipment)
+			html += format_html('<li><a href="{}">{}</a></li>', href, i)
 		html += '</ul>'
 		return format_html(html)
 

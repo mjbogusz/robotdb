@@ -6,7 +6,7 @@ from django.urls import reverse
 from django_tables2.views import SingleTableMixin
 from django_filters.views import FilterView
 
-from robotdb.models import Robot, Equipment
+from robotdb.models import Robot
 from robotdb.tables import RobotTable
 from robotdb.filters import RobotFilter
 
@@ -39,8 +39,6 @@ class RobotDetailView(LoginRequiredMixin, DetailView):
 
 	def get_context_data(self, **kwargs):
 		context = super(RobotDetailView, self).get_context_data(**kwargs)
-		knownEquipmentIDs = self.object.robotequipment_set.all().values_list('equipment_id', flat = True)
-		context['unknownEquipments'] = Equipment.objects.exclude(id__in = knownEquipmentIDs)
 		links = context['robot'].videoLink.split('\n')
 		if len(links) > 1:
 			context['robot'].videoLinks = context['robot'].videoLink.split('\n')
