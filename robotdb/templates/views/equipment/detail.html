@@ -37,13 +37,13 @@
 			<th>Price</th>
 		</tr></thead>
 		<tbody>
-			{% for rf in equipment.robotequipment_set.all %}
+			{% for robot in equipment.robot_set.all %}
 			<tr>
-				<td><a href="{% url 'robotDetail' rf.robot.pk %}">{{ rf.robot.name }}</a></td>
-				<td>{{ rf.robot.producer }}</td>
-				<td>{{ rf.robot.coutry }}</td>
-				<td>{{ rf.robot.year }}</td>
-				<td>{{ rf.robot.price }}</td>
+				<td><a href="{% url 'robotDetail' robot.pk %}">{{ robot.name }}</a></td>
+				<td>{{ robot.producer }}</td>
+				<td>{{ robot.coutry }}</td>
+				<td>{{ robot.year }}</td>
+				<td>{{ robot.price }}</td>
 			</tr>
 			{% endfor %}
 		</tbody>
