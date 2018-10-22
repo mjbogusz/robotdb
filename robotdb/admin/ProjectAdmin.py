@@ -15,7 +15,8 @@ class ProjectAdmin(admin.ModelAdmin):
 	fieldsets = [
 		(None, {'fields': [
 			'name',
-			'year',
+			'yearStart',
+			'yearEnd',
 			'link',
 		]}),
 		('Notes', {'fields': [
@@ -25,11 +26,13 @@ class ProjectAdmin(admin.ModelAdmin):
 
 	list_display = [
 		'name',
-		'year',
+		'yearStart',
+		'yearEnd',
 		'link',
 	]
 	list_filter = [
-		'year',
+		'yearStart',
+		'yearEnd',
 	]
 	search_fields = [
 		'name',

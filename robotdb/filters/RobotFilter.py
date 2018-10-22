@@ -9,7 +9,6 @@ class RobotFilter(FilterSet):
 			'name': ['contains'],
 			'producer': ['contains'],
 			'country': ['contains'],
-			'mobileBase': ['exact'],
 			'year': ['lt', 'gt'],
 			'price': ['lt', 'gt'],
 		}
