@@ -3,9 +3,9 @@ from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.forms import widgets
 from django.urls import reverse
 
-from django_tables2 import RequestConfig
+# from django_tables2 import RequestConfig
 from django_tables2.views import SingleTableMixin
-from django_filters.views import FilterView
+# from django_filters.views import FilterView
 
 from robotdb.models import Project
 from robotdb.tables import ProjectTable
@@ -16,7 +16,8 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 	fields = (
 		'name',
 		'link',
-		'year',
+		'yearStart',
+		'yearEnd',
 		'notes',
 	)
 
@@ -39,7 +40,8 @@ class ProjectUpdateView(LoginRequiredMixin, UpdateView):
 	fields = (
 		'name',
 		'link',
-		'year',
+		'yearStart',
+		'yearEnd',
 		'notes',
 	)
 
